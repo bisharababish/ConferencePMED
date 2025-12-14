@@ -1,13 +1,32 @@
-import { Calendar, MapPin, Clock, Users } from 'lucide-react';
+import { Calendar, MapPin, Clock, Users, Award, Mic, BookOpen, Network, Presentation, UserCircle } from 'lucide-react';
 
 const ConferenceInfo = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Red Header */}
-      <div className="bg-red-600 py-8 px-4" style={{ backgroundColor: '#DC2626' }}>
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-3">
-            <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      {/* Hero Header Section */}
+      <div className="relative bg-gradient-to-r from-red-600 to-red-700 py-16 px-4 overflow-hidden" style={{ backgroundColor: '#DC2626' }}>
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden opacity-10">
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute rounded-full animate-float"
+              style={{
+                width: `${Math.random() * 12 + 4}px`,
+                height: `${Math.random() * 12 + 4}px`,
+                backgroundColor: 'white',
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${Math.random() * 15 + 10}s`,
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="max-w-7xl mx-auto text-center relative z-10">
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <svg width="48" height="48" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-lg">
               <rect x="2" y="2" width="14" height="14" fill="white" rx="1.5" />
               <rect x="26" y="2" width="14" height="14" fill="white" rx="1.5" />
               <rect x="2" y="26" width="14" height="14" fill="white" rx="1.5" />
@@ -18,140 +37,310 @@ const ConferenceInfo = () => {
               <line x1="21" y1="26" x2="21" y2="40" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
             </svg>
             <div className="flex flex-col">
-              <span className="text-2xl font-bold text-white leading-tight">ANNUAL JERUSALEM</span>
-              <span className="text-sm text-white leading-tight">MEDICAL & RESEARCH CONFERENCE</span>
+              <span className="text-3xl md:text-4xl font-bold text-white leading-tight drop-shadow-md">ANNUAL JERUSALEM</span>
+              <span className="text-base md:text-lg text-white leading-tight drop-shadow-md">MEDICAL & RESEARCH CONFERENCE</span>
             </div>
           </div>
-        </div>
-      </div>
-      
-      <div className="bg-white py-12 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-            Conference Information
-          </h1>
+          <p className="text-white/90 text-lg md:text-xl max-w-3xl mx-auto mt-4">
+            Join leading medical professionals, researchers, and innovators for three days of groundbreaking discoveries and collaborative learning
+          </p>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 py-16">
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
-          <div className="bg-white p-8 rounded-lg shadow-lg">
+      {/* Quick Info Cards */}
+      <div className="max-w-7xl mx-auto px-4 -mt-8 relative z-20">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="bg-white p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100">
             <div className="flex items-center mb-4">
-              <div className="bg-red-600 p-3 rounded-full mr-4">
-                <Calendar className="text-white" size={24} />
+              <div className="bg-gradient-to-br from-red-500 to-red-600 p-3 rounded-xl mr-4 shadow-lg">
+                <Calendar className="text-white" size={28} />
               </div>
-              <h3 className="text-2xl font-bold text-black">Dates</h3>
+              <h3 className="text-xl font-bold text-gray-900">Dates</h3>
             </div>
-            <p className="text-gray-700 text-lg">June 15-17, 2025</p>
-            <p className="text-gray-600 mt-2">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            <p className="text-2xl font-bold text-gray-900 mb-2">June 15-17, 2025</p>
+            <p className="text-gray-600 text-sm">
+              Three days of intensive learning and networking
             </p>
           </div>
 
-          <div className="bg-white p-8 rounded-lg shadow-lg">
+          <div className="bg-white p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100">
             <div className="flex items-center mb-4">
-              <div className="bg-red-600 p-3 rounded-full mr-4">
-                <MapPin className="text-white" size={24} />
+              <div className="bg-gradient-to-br from-red-500 to-red-600 p-3 rounded-xl mr-4 shadow-lg">
+                <MapPin className="text-white" size={28} />
               </div>
-              <h3 className="text-2xl font-bold text-black">Venue</h3>
+              <h3 className="text-xl font-bold text-gray-900">Venue</h3>
             </div>
-            <p className="text-gray-700 text-lg">Lorem City Convention Center</p>
-            <p className="text-gray-600 mt-2">
-              123 Lorem Street, Lorem City, LC 12345. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris.
+            <p className="text-xl font-bold text-gray-900 mb-2">Jerusalem Convention Center</p>
+            <p className="text-gray-600 text-sm">
+              State-of-the-art facilities in the heart of Jerusalem
             </p>
           </div>
 
-          <div className="bg-white p-8 rounded-lg shadow-lg">
+          <div className="bg-white p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100">
             <div className="flex items-center mb-4">
-              <div className="bg-red-600 p-3 rounded-full mr-4">
-                <Clock className="text-white" size={24} />
+              <div className="bg-gradient-to-br from-red-500 to-red-600 p-3 rounded-xl mr-4 shadow-lg">
+                <Clock className="text-white" size={28} />
               </div>
-              <h3 className="text-2xl font-bold text-black">Schedule</h3>
+              <h3 className="text-xl font-bold text-gray-900">Schedule</h3>
             </div>
-            <p className="text-gray-700 text-lg">9:00 AM - 6:00 PM Daily</p>
-            <p className="text-gray-600 mt-2">
-              Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur.
+            <p className="text-xl font-bold text-gray-900 mb-2">9:00 AM - 6:00 PM</p>
+            <p className="text-gray-600 text-sm">
+              Daily sessions with evening networking events
             </p>
           </div>
 
-          <div className="bg-white p-8 rounded-lg shadow-lg">
+          <div className="bg-white p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100">
             <div className="flex items-center mb-4">
-              <div className="bg-red-600 p-3 rounded-full mr-4">
-                <Users className="text-white" size={24} />
+              <div className="bg-gradient-to-br from-red-500 to-red-600 p-3 rounded-xl mr-4 shadow-lg">
+                <Users className="text-white" size={28} />
               </div>
-              <h3 className="text-2xl font-bold text-black">Attendees</h3>
+              <h3 className="text-xl font-bold text-gray-900">Attendees</h3>
             </div>
-            <p className="text-gray-700 text-lg">500+ Expected Participants</p>
-            <p className="text-gray-600 mt-2">
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-              officia deserunt mollit anim.
+            <p className="text-2xl font-bold text-gray-900 mb-2">500+</p>
+            <p className="text-gray-600 text-sm">
+              Medical professionals and researchers from around the world
             </p>
           </div>
         </div>
+      </div>
 
-        <div className="bg-white p-10 rounded-lg shadow-lg mb-16">
-          <h2 className="text-3xl font-bold mb-6 text-black">About the Conference</h2>
-          <p className="text-gray-700 leading-relaxed mb-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur.
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-4">
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
-            ab illo inventore veritatis et quasi architecto beatae vitae dicta
-            sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-            aspernatur aut odit aut fugit.
-          </p>
-          <p className="text-gray-700 leading-relaxed">
-            At vero eos et accusamus et iusto odio dignissimos ducimus qui
-            blanditiis praesentium voluptatum deleniti atque corrupti quos
-            dolores et quas molestias excepturi sint occaecati cupiditate non
-            provident, similique sunt in culpa qui officia deserunt mollitia
-            animi, id est laborum et dolorum fuga.
-          </p>
-        </div>
-
-        <div className="bg-white p-10 rounded-lg shadow-lg">
-          <h2 className="text-3xl font-bold mb-6 text-black">Daily Schedule</h2>
+      <div className="max-w-7xl mx-auto px-4 py-20">
+        {/* About Section */}
+        <div className="bg-white rounded-2xl p-10 md:p-12 shadow-xl mb-16 border border-gray-100">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="h-1 w-16 rounded-full" style={{ backgroundColor: '#DC2626' }}></div>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">About the Conference</h2>
+          </div>
           <div className="space-y-6">
-            <div className="border-l-4 border-red-600 pl-6">
-              <h3 className="text-xl font-bold text-black mb-2">Day 1 - June 15, 2025</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex"><span className="font-semibold w-32">9:00 AM</span> Registration & Welcome Coffee</li>
-                <li className="flex"><span className="font-semibold w-32">10:00 AM</span> Opening Ceremony</li>
-                <li className="flex"><span className="font-semibold w-32">11:00 AM</span> Keynote Speech</li>
-                <li className="flex"><span className="font-semibold w-32">12:30 PM</span> Lunch Break</li>
-                <li className="flex"><span className="font-semibold w-32">2:00 PM</span> Panel Discussion</li>
-                <li className="flex"><span className="font-semibold w-32">4:00 PM</span> Workshop Sessions</li>
-                <li className="flex"><span className="font-semibold w-32">6:00 PM</span> Networking Reception</li>
-              </ul>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              The Annual Jerusalem Medical & Research Conference brings together leading medical professionals, researchers, and innovators from around the globe to share cutting-edge discoveries, discuss emerging trends, and foster collaborative partnerships in healthcare and medical research.
+            </p>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              This premier event features keynote presentations from world-renowned experts, interactive workshops, poster sessions showcasing groundbreaking research, and extensive networking opportunities. Whether you're a practicing clinician, researcher, medical student, or industry professional, this conference offers valuable insights and connections to advance your career and contribute to the future of medicine.
+            </p>
+            <div className="grid md:grid-cols-3 gap-6 mt-8">
+              <div className="bg-gradient-to-br from-red-50 to-white p-6 rounded-xl border-l-4" style={{ borderLeftColor: '#DC2626' }}>
+                <Award className="text-red-600 mb-3" size={32} />
+                <h3 className="text-lg font-bold text-gray-900 mb-2">Excellence in Research</h3>
+                <p className="text-gray-600 text-sm">Recognizing outstanding contributions to medical science</p>
+              </div>
+              <div className="bg-gradient-to-br from-red-50 to-white p-6 rounded-xl border-l-4" style={{ borderLeftColor: '#DC2626' }}>
+                <Network className="text-red-600 mb-3" size={32} />
+                <h3 className="text-lg font-bold text-gray-900 mb-2">Global Networking</h3>
+                <p className="text-gray-600 text-sm">Connect with peers and leaders in the medical field</p>
+              </div>
+              <div className="bg-gradient-to-br from-red-50 to-white p-6 rounded-xl border-l-4" style={{ borderLeftColor: '#DC2626' }}>
+                <BookOpen className="text-red-600 mb-3" size={32} />
+                <h3 className="text-lg font-bold text-gray-900 mb-2">Continuing Education</h3>
+                <p className="text-gray-600 text-sm">Earn CME credits and expand your knowledge base</p>
+              </div>
             </div>
-            <div className="border-l-4 border-red-600 pl-6">
-              <h3 className="text-xl font-bold text-black mb-2">Day 2 - June 16, 2025</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex"><span className="font-semibold w-32">9:00 AM</span> Morning Sessions</li>
-                <li className="flex"><span className="font-semibold w-32">10:30 AM</span> Technical Presentations</li>
-                <li className="flex"><span className="font-semibold w-32">12:30 PM</span> Lunch Break</li>
-                <li className="flex"><span className="font-semibold w-32">2:00 PM</span> Parallel Workshops</li>
-                <li className="flex"><span className="font-semibold w-32">4:00 PM</span> Poster Sessions</li>
-                <li className="flex"><span className="font-semibold w-32">6:00 PM</span> Evening Social Event</li>
-              </ul>
+          </div>
+        </div>
+
+        {/* Conference Highlights */}
+        <div className="mb-16">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="h-1 w-16 rounded-full" style={{ backgroundColor: '#DC2626' }}></div>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Conference Highlights</h2>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
+              <Mic className="text-red-600 mb-4" size={32} />
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Keynote Speakers</h3>
+              <p className="text-gray-600">World-renowned experts sharing insights on the latest medical breakthroughs</p>
             </div>
-            <div className="border-l-4 border-red-600 pl-6">
-              <h3 className="text-xl font-bold text-black mb-2">Day 3 - June 17, 2025</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex"><span className="font-semibold w-32">9:00 AM</span> Final Sessions</li>
-                <li className="flex"><span className="font-semibold w-32">11:00 AM</span> Closing Keynote</li>
-                <li className="flex"><span className="font-semibold w-32">12:30 PM</span> Lunch & Farewell</li>
-                <li className="flex"><span className="font-semibold w-32">2:00 PM</span> Certificate Distribution</li>
-              </ul>
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
+              <Presentation className="text-red-600 mb-4" size={32} />
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Research Presentations</h3>
+              <p className="text-gray-600">Oral and poster presentations showcasing cutting-edge research findings</p>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
+              <UserCircle className="text-red-600 mb-4" size={32} />
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Interactive Workshops</h3>
+              <p className="text-gray-600">Hands-on sessions covering practical skills and new techniques</p>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
+              <Network className="text-red-600 mb-4" size={32} />
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Networking Events</h3>
+              <p className="text-gray-600">Evening receptions and social gatherings to build professional connections</p>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
+              <Award className="text-red-600 mb-4" size={32} />
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Awards Ceremony</h3>
+              <p className="text-gray-600">Recognizing outstanding contributions to medical research and practice</p>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
+              <BookOpen className="text-red-600 mb-4" size={32} />
+              <h3 className="text-xl font-bold text-gray-900 mb-2">CME Credits</h3>
+              <p className="text-gray-600">Earn continuing medical education credits for professional development</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Daily Schedule */}
+        <div className="bg-white rounded-2xl p-10 md:p-12 shadow-xl border border-gray-100">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="h-1 w-16 rounded-full" style={{ backgroundColor: '#DC2626' }}></div>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Daily Schedule</h2>
+          </div>
+          <div className="space-y-8">
+            {/* Day 1 */}
+            <div className="relative">
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-red-500 to-red-600 rounded-full"></div>
+              <div className="ml-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="bg-red-600 text-white px-4 py-1 rounded-full text-sm font-bold">Day 1</div>
+                  <h3 className="text-2xl font-bold text-gray-900">June 15, 2025 - Opening Day</h3>
+                </div>
+                <div className="bg-gray-50 rounded-xl p-6 space-y-4">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-red-100 text-red-700 px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center">9:00 AM</div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Registration & Welcome Coffee</p>
+                      <p className="text-sm text-gray-600">Main Lobby</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="bg-red-100 text-red-700 px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center">10:00 AM</div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Opening Ceremony</p>
+                      <p className="text-sm text-gray-600">Grand Hall</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="bg-red-100 text-red-700 px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center">11:00 AM</div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Keynote Address: Future of Medical Research</p>
+                      <p className="text-sm text-gray-600">Grand Hall</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="bg-red-100 text-red-700 px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center">12:30 PM</div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Lunch Break</p>
+                      <p className="text-sm text-gray-600">Dining Hall</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="bg-red-100 text-red-700 px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center">2:00 PM</div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Panel Discussion: Emerging Technologies</p>
+                      <p className="text-sm text-gray-600">Conference Room A</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="bg-red-100 text-red-700 px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center">4:00 PM</div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Workshop Sessions (Parallel Tracks)</p>
+                      <p className="text-sm text-gray-600">Multiple Rooms</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="bg-red-100 text-red-700 px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center">6:00 PM</div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Welcome Reception & Networking</p>
+                      <p className="text-sm text-gray-600">Rooftop Terrace</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Day 2 */}
+            <div className="relative">
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-red-500 to-red-600 rounded-full"></div>
+              <div className="ml-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="bg-red-600 text-white px-4 py-1 rounded-full text-sm font-bold">Day 2</div>
+                  <h3 className="text-2xl font-bold text-gray-900">June 16, 2025 - Research Day</h3>
+                </div>
+                <div className="bg-gray-50 rounded-xl p-6 space-y-4">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-red-100 text-red-700 px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center">9:00 AM</div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Morning Research Sessions</p>
+                      <p className="text-sm text-gray-600">Multiple Tracks</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="bg-red-100 text-red-700 px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center">10:30 AM</div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Technical Presentations</p>
+                      <p className="text-sm text-gray-600">Conference Rooms A & B</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="bg-red-100 text-red-700 px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center">12:30 PM</div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Lunch Break</p>
+                      <p className="text-sm text-gray-600">Dining Hall</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="bg-red-100 text-red-700 px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center">2:00 PM</div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Parallel Workshop Sessions</p>
+                      <p className="text-sm text-gray-600">Workshop Rooms 1-4</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="bg-red-100 text-red-700 px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center">4:00 PM</div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Poster Sessions & Exhibition</p>
+                      <p className="text-sm text-gray-600">Exhibition Hall</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="bg-red-100 text-red-700 px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center">6:00 PM</div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Evening Social Event</p>
+                      <p className="text-sm text-gray-600">Cultural Center</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Day 3 */}
+            <div className="relative">
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-red-500 to-red-600 rounded-full"></div>
+              <div className="ml-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="bg-red-600 text-white px-4 py-1 rounded-full text-sm font-bold">Day 3</div>
+                  <h3 className="text-2xl font-bold text-gray-900">June 17, 2025 - Closing Day</h3>
+                </div>
+                <div className="bg-gray-50 rounded-xl p-6 space-y-4">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-red-100 text-red-700 px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center">9:00 AM</div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Final Research Sessions</p>
+                      <p className="text-sm text-gray-600">Multiple Tracks</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="bg-red-100 text-red-700 px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center">11:00 AM</div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Closing Keynote: Looking Forward</p>
+                      <p className="text-sm text-gray-600">Grand Hall</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="bg-red-100 text-red-700 px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center">12:30 PM</div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Farewell Lunch & Awards Ceremony</p>
+                      <p className="text-sm text-gray-600">Grand Hall</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="bg-red-100 text-red-700 px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center">2:00 PM</div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Certificate Distribution & Closing Remarks</p>
+                      <p className="text-sm text-gray-600">Main Lobby</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
