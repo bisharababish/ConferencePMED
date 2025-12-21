@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import { CheckCircle } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
+import toast from 'react-hot-toast';
+import { supabase, ContactData } from '../lib/supabase';
+import { generateId } from '../lib/utils';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -8,23 +11,52 @@ const Contact = () => {
     email: '',
     phone: '',
     query: '',
+    subject: '',
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Contact form submission:', formData);
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
+    setLoading(true);
+
+    try {
+      const contactData: ContactData = {
+        id: generateId(),
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        email: formData.email,
+        phone: formData.phone || undefined,
+        subject: formData.subject || undefined,
+        message: formData.query,
+      };
+
+      toast.loading('Sending message...', { id: 'contact' });
+      const { error: dbError } = await supabase
+        .from('contacts')
+        .insert([contactData]);
+
+      if (dbError) {
+        throw dbError;
+      }
+
+      toast.dismiss('contact');
+      toast.success('Message Sent Successfully! Thank you for contacting us. We will get back to you soon.');
+      
       setFormData({
         firstName: '',
         lastName: '',
         email: '',
         phone: '',
         query: '',
+        subject: '',
       });
-    }, 3000);
+    } catch (err: any) {
+      console.error('Contact form error:', err);
+      toast.dismiss('contact');
+      toast.error(err.message || 'Failed to send message. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (
@@ -38,8 +70,8 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Red Header */}
-      <div className="bg-red-600 py-8 px-4" style={{ backgroundColor: '#DC2626' }}>
+      {/* Header */}
+      <div className="bg-gradient-to-r py-8 px-4" style={{ background: 'linear-gradient(to right, #1e3a8a, #1e40af)' }}>
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center gap-3">
             <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -62,19 +94,6 @@ const Contact = () => {
 
       {/* Main Content Area */}
       <div className="max-w-4xl mx-auto px-4 py-16">
-        {submitted && (
-          <div className="bg-green-50 border-2 border-green-500 rounded-lg p-6 mb-8 flex items-center">
-            <CheckCircle className="text-green-600 mr-4" size={32} />
-            <div>
-              <h3 className="text-xl font-bold text-green-800 mb-1">
-                Message Sent Successfully!
-              </h3>
-              <p className="text-green-700">
-                Thank you for contacting us. We will get back to you soon.
-              </p>
-            </div>
-          </div>
-        )}
 
         {/* Contact Us Form Card */}
         <div className="bg-white rounded-xl p-8 md:p-12 shadow-xl border border-gray-200">
@@ -82,7 +101,7 @@ const Contact = () => {
             Contact Us
           </h1>
           <p className="text-gray-600 text-center mb-8">
-            Submit our Employer Needs Form, schedule a discovery call, or reach out directly. We look forward to partnering with European companies and connecting talented professionals with exciting opportunities.
+            Send us a message. Reach out with feedback and questions.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -99,7 +118,7 @@ const Contact = () => {
                   required
                   className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none transition-colors text-black bg-white"
                   placeholder="Please enter first name..."
-                  onFocus={(e) => e.currentTarget.style.borderColor = '#DC2626'}
+                  onFocus={(e) => e.currentTarget.style.borderColor = '#1e3a8a'}
                   onBlur={(e) => e.currentTarget.style.borderColor = '#D1D5DB'}
                 />
               </div>
@@ -116,7 +135,7 @@ const Contact = () => {
                   required
                   className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none transition-colors text-black bg-white"
                   placeholder="Please enter last name..."
-                  onFocus={(e) => e.currentTarget.style.borderColor = '#DC2626'}
+                  onFocus={(e) => e.currentTarget.style.borderColor = '#1e3a8a'}
                   onBlur={(e) => e.currentTarget.style.borderColor = '#D1D5DB'}
                 />
               </div>
@@ -135,7 +154,7 @@ const Contact = () => {
                   required
                   className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none transition-colors text-black bg-white"
                   placeholder="Please enter email..."
-                  onFocus={(e) => e.currentTarget.style.borderColor = '#DC2626'}
+                  onFocus={(e) => e.currentTarget.style.borderColor = '#1e3a8a'}
                   onBlur={(e) => e.currentTarget.style.borderColor = '#D1D5DB'}
                 />
               </div>
@@ -152,7 +171,7 @@ const Contact = () => {
                   required
                   className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none transition-colors text-black bg-white"
                   placeholder="Please enter phone number..."
-                  onFocus={(e) => e.currentTarget.style.borderColor = '#DC2626'}
+                  onFocus={(e) => e.currentTarget.style.borderColor = '#1e3a8a'}
                   onBlur={(e) => e.currentTarget.style.borderColor = '#D1D5DB'}
                 />
               </div>
@@ -160,7 +179,23 @@ const Contact = () => {
 
             <div>
               <label className="block text-xs font-bold mb-2 text-gray-700 uppercase tracking-wide">
-                What do you have in mind
+                Subject
+              </label>
+              <input
+                type="text"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none transition-colors text-black bg-white"
+                placeholder="Please enter subject..."
+                onFocus={(e) => e.currentTarget.style.borderColor = '#1e3a8a'}
+                onBlur={(e) => e.currentTarget.style.borderColor = '#D1D5DB'}
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold mb-2 text-gray-700 uppercase tracking-wide">
+                Message
               </label>
               <textarea
                 name="query"
@@ -178,12 +213,20 @@ const Contact = () => {
             <div className="text-center pt-4">
               <button
                 type="submit"
-                className="text-white font-bold py-4 px-12 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl"
-                style={{ backgroundColor: '#DC2626' }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#B91C1C'}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#DC2626'}
+                disabled={loading}
+                className="text-white font-bold py-4 px-12 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mx-auto"
+                style={{ backgroundColor: '#1e3a8a' }}
+                onMouseEnter={(e) => !loading && (e.currentTarget.style.backgroundColor = '#1e40af')}
+                onMouseLeave={(e) => !loading && (e.currentTarget.style.backgroundColor = '#1e3a8a')}
               >
-                Submit
+                {loading ? (
+                  <>
+                    <Loader2 className="animate-spin" size={20} />
+                    Sending...
+                  </>
+                ) : (
+                  'Submit'
+                )}
               </button>
             </div>
           </form>
@@ -191,28 +234,26 @@ const Contact = () => {
 
         {/* Next Steps & Contact Section */}
         <div className="mt-12 bg-gray-100 rounded-xl p-8 md:p-12">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-center" style={{ color: '#DC2626' }}>
-            Next Steps & Contact
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-center" style={{ color: '#1e3a8a' }}>
+            Our Contact Information
           </h2>
-          <p className="text-gray-700 text-center mb-8 max-w-3xl mx-auto">
-            Submit our Employer Needs Form, schedule a discovery call, or reach out directly. We look forward to partnering with European companies and connecting talented professionals with exciting opportunities.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              className="text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
-              style={{ backgroundColor: '#DC2626' }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#B91C1C'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#DC2626'}
-            >
-              Employer Needs Form
-            </button>
-            <button
-              className="bg-white border-2 font-bold py-3 px-8 rounded-lg transition-all duration-300 hover:bg-gray-50"
-              style={{ borderColor: '#DC2626', color: '#DC2626' }}
-            >
-              Schedule Discovery Call
-            </button>
+          <div className="space-y-4 text-center mb-8">
+            <p className="text-gray-700">
+              <strong>Email:</strong> [Email address to be added]
+            </p>
+            <p className="text-gray-700">
+              <strong>Instagram:</strong> [Instagram handle to be added]
+            </p>
+            <p className="text-gray-700">
+              <strong>Location:</strong> [Location to be added]
+            </p>
+            <p className="text-gray-700">
+              <strong>Contact us:</strong> [Contact information to be added]
+            </p>
           </div>
+          <p className="text-gray-700 text-center mb-8 max-w-3xl mx-auto">
+            Send us a message. Reach out with feedback and questions.
+          </p>
         </div>
       </div>
     </div>

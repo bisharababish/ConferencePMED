@@ -4,7 +4,7 @@ const ConferenceInfo = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Hero Header Section */}
-      <div className="relative bg-gradient-to-r from-red-600 to-red-700 py-16 px-4 overflow-hidden" style={{ backgroundColor: '#DC2626' }}>
+      <div className="relative bg-gradient-to-r py-16 px-4 overflow-hidden" style={{ background: 'linear-gradient(to right, #1e3a8a, #1e40af)' }}>
         {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden opacity-10">
           {[...Array(20)].map((_, i) => (
@@ -52,53 +52,53 @@ const ConferenceInfo = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="bg-white p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100">
             <div className="flex items-center mb-4">
-              <div className="bg-gradient-to-br from-red-500 to-red-600 p-3 rounded-xl mr-4 shadow-lg">
+              <div className="bg-gradient-to-br p-3 rounded-xl mr-4 shadow-lg" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #1e40af)' }}>
                 <Calendar className="text-white" size={28} />
               </div>
               <h3 className="text-xl font-bold text-gray-900">Dates</h3>
             </div>
-            <p className="text-2xl font-bold text-gray-900 mb-2">June 15-17, 2025</p>
+            <p className="text-2xl font-bold text-gray-900 mb-2">30 January 2026</p>
             <p className="text-gray-600 text-sm">
-              Three days of intensive learning and networking
+              A flagship scientific event
             </p>
           </div>
 
           <div className="bg-white p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100">
             <div className="flex items-center mb-4">
-              <div className="bg-gradient-to-br from-red-500 to-red-600 p-3 rounded-xl mr-4 shadow-lg">
+              <div className="bg-gradient-to-br p-3 rounded-xl mr-4 shadow-lg" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #1e40af)' }}>
                 <MapPin className="text-white" size={28} />
               </div>
               <h3 className="text-xl font-bold text-gray-900">Venue</h3>
             </div>
-            <p className="text-xl font-bold text-gray-900 mb-2">Jerusalem Convention Center</p>
+            <p className="text-xl font-bold text-gray-900 mb-2">Millennium Hotel, Ramallah</p>
             <p className="text-gray-600 text-sm">
-              State-of-the-art facilities in the heart of Jerusalem
+              Located in Al-Masyoun, Ramallah
             </p>
           </div>
 
           <div className="bg-white p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100">
             <div className="flex items-center mb-4">
-              <div className="bg-gradient-to-br from-red-500 to-red-600 p-3 rounded-xl mr-4 shadow-lg">
+              <div className="bg-gradient-to-br p-3 rounded-xl mr-4 shadow-lg" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #1e40af)' }}>
                 <Clock className="text-white" size={28} />
               </div>
               <h3 className="text-xl font-bold text-gray-900">Schedule</h3>
             </div>
-            <p className="text-xl font-bold text-gray-900 mb-2">9:00 AM - 6:00 PM</p>
+            <p className="text-xl font-bold text-gray-900 mb-2">Full Day Event</p>
             <p className="text-gray-600 text-sm">
-              Daily sessions with evening networking events
+              Scientific sessions and networking
             </p>
           </div>
 
           <div className="bg-white p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100">
             <div className="flex items-center mb-4">
-              <div className="bg-gradient-to-br from-red-500 to-red-600 p-3 rounded-xl mr-4 shadow-lg">
+              <div className="bg-gradient-to-br p-3 rounded-xl mr-4 shadow-lg" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #1e40af)' }}>
                 <Users className="text-white" size={28} />
               </div>
               <h3 className="text-xl font-bold text-gray-900">Attendees</h3>
             </div>
-            <p className="text-2xl font-bold text-gray-900 mb-2">500+</p>
+            <p className="text-2xl font-bold text-gray-900 mb-2">500–700</p>
             <p className="text-gray-600 text-sm">
-              Medical professionals and researchers from around the world
+              Expected Participants
             </p>
           </div>
         </div>
@@ -108,29 +108,29 @@ const ConferenceInfo = () => {
         {/* About Section */}
         <div className="bg-white rounded-2xl p-10 md:p-12 shadow-xl mb-16 border border-gray-100">
           <div className="flex items-center gap-3 mb-8">
-            <div className="h-1 w-16 rounded-full" style={{ backgroundColor: '#DC2626' }}></div>
+            <div className="h-1 w-16 rounded-full" style={{ backgroundColor: '#1e3a8a' }}></div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900">About the Conference</h2>
           </div>
           <div className="space-y-6">
             <p className="text-lg text-gray-700 leading-relaxed">
-              The Annual Jerusalem Medical & Research Conference brings together leading medical professionals, researchers, and innovators from around the globe to share cutting-edge discoveries, discuss emerging trends, and foster collaborative partnerships in healthcare and medical research.
+              The First Annual Jerusalem Medical Conference 2026 is a multidisciplinary medical and scientific conference organized by the Medical Association – Jerusalem Center, with the support of the Palestine Medical Club (PMED Club).
             </p>
             <p className="text-lg text-gray-700 leading-relaxed">
-              This premier event features keynote presentations from world-renowned experts, interactive workshops, poster sessions showcasing groundbreaking research, and extensive networking opportunities. Whether you're a practicing clinician, researcher, medical student, or industry professional, this conference offers valuable insights and connections to advance your career and contribute to the future of medicine.
+              This conference marks the launch of an annual national platform dedicated to continuous medical education, scientific exchange, leadership development, and healthcare innovation in Palestine.
             </p>
             <div className="grid md:grid-cols-3 gap-6 mt-8">
-              <div className="bg-gradient-to-br from-red-50 to-white p-6 rounded-xl border-l-4" style={{ borderLeftColor: '#DC2626' }}>
-                <Award className="text-red-600 mb-3" size={32} />
+              <div className="bg-gradient-to-br from-blue-50 to-white p-6 rounded-xl border-l-4" style={{ borderLeftColor: '#1e3a8a' }}>
+                <Award className="mb-3" size={32} style={{ color: '#1e3a8a' }} />
                 <h3 className="text-lg font-bold text-gray-900 mb-2">Excellence in Research</h3>
                 <p className="text-gray-600 text-sm">Recognizing outstanding contributions to medical science</p>
               </div>
-              <div className="bg-gradient-to-br from-red-50 to-white p-6 rounded-xl border-l-4" style={{ borderLeftColor: '#DC2626' }}>
-                <Network className="text-red-600 mb-3" size={32} />
+              <div className="bg-gradient-to-br from-blue-50 to-white p-6 rounded-xl border-l-4" style={{ borderLeftColor: '#1e3a8a' }}>
+                <Network className="mb-3" size={32} style={{ color: '#1e3a8a' }} />
                 <h3 className="text-lg font-bold text-gray-900 mb-2">Global Networking</h3>
                 <p className="text-gray-600 text-sm">Connect with peers and leaders in the medical field</p>
               </div>
-              <div className="bg-gradient-to-br from-red-50 to-white p-6 rounded-xl border-l-4" style={{ borderLeftColor: '#DC2626' }}>
-                <BookOpen className="text-red-600 mb-3" size={32} />
+              <div className="bg-gradient-to-br from-blue-50 to-white p-6 rounded-xl border-l-4" style={{ borderLeftColor: '#1e3a8a' }}>
+                <BookOpen className="mb-3" size={32} style={{ color: '#1e3a8a' }} />
                 <h3 className="text-lg font-bold text-gray-900 mb-2">Continuing Education</h3>
                 <p className="text-gray-600 text-sm">Earn CME credits and expand your knowledge base</p>
               </div>
@@ -141,37 +141,37 @@ const ConferenceInfo = () => {
         {/* Conference Highlights */}
         <div className="mb-16">
           <div className="flex items-center gap-3 mb-8">
-            <div className="h-1 w-16 rounded-full" style={{ backgroundColor: '#DC2626' }}></div>
+            <div className="h-1 w-16 rounded-full" style={{ backgroundColor: '#1e3a8a' }}></div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Conference Highlights</h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
-              <Mic className="text-red-600 mb-4" size={32} />
+              <Mic className="mb-4" size={32} style={{ color: '#1e3a8a' }} />
               <h3 className="text-xl font-bold text-gray-900 mb-2">Keynote Speakers</h3>
               <p className="text-gray-600">World-renowned experts sharing insights on the latest medical breakthroughs</p>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
-              <Presentation className="text-red-600 mb-4" size={32} />
+              <Presentation className="mb-4" size={32} style={{ color: '#1e3a8a' }} />
               <h3 className="text-xl font-bold text-gray-900 mb-2">Research Presentations</h3>
               <p className="text-gray-600">Oral and poster presentations showcasing cutting-edge research findings</p>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
-              <UserCircle className="text-red-600 mb-4" size={32} />
+              <UserCircle className="mb-4" size={32} style={{ color: '#1e3a8a' }} />
               <h3 className="text-xl font-bold text-gray-900 mb-2">Interactive Workshops</h3>
               <p className="text-gray-600">Hands-on sessions covering practical skills and new techniques</p>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
-              <Network className="text-red-600 mb-4" size={32} />
+              <Network className="mb-4" size={32} style={{ color: '#1e3a8a' }} />
               <h3 className="text-xl font-bold text-gray-900 mb-2">Networking Events</h3>
               <p className="text-gray-600">Evening receptions and social gatherings to build professional connections</p>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
-              <Award className="text-red-600 mb-4" size={32} />
+              <Award className="mb-4" size={32} style={{ color: '#1e3a8a' }} />
               <h3 className="text-xl font-bold text-gray-900 mb-2">Awards Ceremony</h3>
               <p className="text-gray-600">Recognizing outstanding contributions to medical research and practice</p>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
-              <BookOpen className="text-red-600 mb-4" size={32} />
+              <BookOpen className="mb-4" size={32} style={{ color: '#1e3a8a' }} />
               <h3 className="text-xl font-bold text-gray-900 mb-2">CME Credits</h3>
               <p className="text-gray-600">Earn continuing medical education credits for professional development</p>
             </div>
@@ -181,21 +181,21 @@ const ConferenceInfo = () => {
         {/* Daily Schedule */}
         <div className="bg-white rounded-2xl p-10 md:p-12 shadow-xl border border-gray-100">
           <div className="flex items-center gap-3 mb-8">
-            <div className="h-1 w-16 rounded-full" style={{ backgroundColor: '#DC2626' }}></div>
+            <div className="h-1 w-16 rounded-full" style={{ backgroundColor: '#1e3a8a' }}></div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Daily Schedule</h2>
           </div>
           <div className="space-y-8">
             {/* Day 1 */}
             <div className="relative">
-              <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-red-500 to-red-600 rounded-full"></div>
+              <div className="absolute left-0 top-0 bottom-0 w-1 rounded-full" style={{ background: 'linear-gradient(to bottom, #1e3a8a, #1e40af)' }}></div>
               <div className="ml-8">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="bg-red-600 text-white px-4 py-1 rounded-full text-sm font-bold">Day 1</div>
-                  <h3 className="text-2xl font-bold text-gray-900">June 15, 2025 - Opening Day</h3>
+                  <div className="text-white px-4 py-1 rounded-full text-sm font-bold" style={{ backgroundColor: '#1e3a8a' }}>Day 1</div>
+                  <h3 className="text-2xl font-bold text-gray-900">30 January 2026</h3>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-6 space-y-4">
                   <div className="flex items-start gap-4">
-                    <div className="bg-red-100 text-red-700 px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center">9:00 AM</div>
+                    <div className="px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center" style={{ backgroundColor: '#DBEAFE', color: '#1e3a8a' }}>9:00 AM</div>
                     <div>
                       <p className="font-semibold text-gray-900">Registration & Welcome Coffee</p>
                       <p className="text-sm text-gray-600">Main Lobby</p>
@@ -249,15 +249,15 @@ const ConferenceInfo = () => {
 
             {/* Day 2 */}
             <div className="relative">
-              <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-red-500 to-red-600 rounded-full"></div>
+              <div className="absolute left-0 top-0 bottom-0 w-1 rounded-full" style={{ background: 'linear-gradient(to bottom, #1e3a8a, #1e40af)' }}></div>
               <div className="ml-8">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="bg-red-600 text-white px-4 py-1 rounded-full text-sm font-bold">Day 2</div>
-                  <h3 className="text-2xl font-bold text-gray-900">June 16, 2025 - Research Day</h3>
+                  <div className="text-white px-4 py-1 rounded-full text-sm font-bold" style={{ backgroundColor: '#1e3a8a' }}>Program</div>
+                  <h3 className="text-2xl font-bold text-gray-900">Scientific Sessions</h3>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-6 space-y-4">
                   <div className="flex items-start gap-4">
-                    <div className="bg-red-100 text-red-700 px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center">9:00 AM</div>
+                    <div className="px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center" style={{ backgroundColor: '#DBEAFE', color: '#1e3a8a' }}>9:00 AM</div>
                     <div>
                       <p className="font-semibold text-gray-900">Morning Research Sessions</p>
                       <p className="text-sm text-gray-600">Multiple Tracks</p>
@@ -304,15 +304,15 @@ const ConferenceInfo = () => {
 
             {/* Day 3 */}
             <div className="relative">
-              <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-red-500 to-red-600 rounded-full"></div>
+              <div className="absolute left-0 top-0 bottom-0 w-1 rounded-full" style={{ background: 'linear-gradient(to bottom, #1e3a8a, #1e40af)' }}></div>
               <div className="ml-8">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="bg-red-600 text-white px-4 py-1 rounded-full text-sm font-bold">Day 3</div>
-                  <h3 className="text-2xl font-bold text-gray-900">June 17, 2025 - Closing Day</h3>
+                  <div className="text-white px-4 py-1 rounded-full text-sm font-bold" style={{ backgroundColor: '#1e3a8a' }}>Program</div>
+                  <h3 className="text-2xl font-bold text-gray-900">Workshops & Networking</h3>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-6 space-y-4">
                   <div className="flex items-start gap-4">
-                    <div className="bg-red-100 text-red-700 px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center">9:00 AM</div>
+                    <div className="px-3 py-1 rounded-lg font-bold text-sm min-w-[80px] text-center" style={{ backgroundColor: '#DBEAFE', color: '#1e3a8a' }}>9:00 AM</div>
                     <div>
                       <p className="font-semibold text-gray-900">Final Research Sessions</p>
                       <p className="text-sm text-gray-600">Multiple Tracks</p>

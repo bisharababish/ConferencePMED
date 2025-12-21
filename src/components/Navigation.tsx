@@ -13,7 +13,6 @@ const Navigation = ({ activeTab, setActiveTab }: NavigationProps) => {
     { id: 'home', label: 'Home' },
     { id: 'conference', label: 'Conference Information' },
     { id: 'submissions', label: 'Submissions' },
-    { id: 'sponsorship', label: 'Sponsorship' },
     { id: 'registration', label: 'Registration' },
     { id: 'contact', label: 'Contact Us' },
   ];
@@ -26,8 +25,8 @@ const Navigation = ({ activeTab, setActiveTab }: NavigationProps) => {
 
   return (
     <nav className="bg-white sticky top-0 z-50 shadow-sm">
-      {/* Red top bar */}
-      <div className="h-1" style={{ backgroundColor: '#DC2626' }}></div>
+      {/* Top bar */}
+      <div className="h-1" style={{ backgroundColor: '#1e3a8a' }}></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
@@ -39,19 +38,19 @@ const Navigation = ({ activeTab, setActiveTab }: NavigationProps) => {
             >
               <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                 {/* Top left square */}
-                <rect x="2" y="2" width="14" height="14" fill="#DC2626" rx="1.5" />
+                <rect x="2" y="2" width="14" height="14" fill="#1e3a8a" rx="1.5" />
                 {/* Top right square */}
-                <rect x="26" y="2" width="14" height="14" fill="#DC2626" rx="1.5" />
+                <rect x="26" y="2" width="14" height="14" fill="#1e3a8a" rx="1.5" />
                 {/* Bottom left square */}
-                <rect x="2" y="26" width="14" height="14" fill="#DC2626" rx="1.5" />
+                <rect x="2" y="26" width="14" height="14" fill="#1e3a8a" rx="1.5" />
                 {/* Bottom right square */}
-                <rect x="26" y="26" width="14" height="14" fill="#DC2626" rx="1.5" />
+                <rect x="26" y="26" width="14" height="14" fill="#1e3a8a" rx="1.5" />
                 {/* Horizontal connections */}
-                <line x1="16" y1="9" x2="26" y2="9" stroke="#DC2626" strokeWidth="2.5" strokeLinecap="round" />
-                <line x1="16" y1="33" x2="26" y2="33" stroke="#DC2626" strokeWidth="2.5" strokeLinecap="round" />
+                <line x1="16" y1="9" x2="26" y2="9" stroke="#1e3a8a" strokeWidth="2.5" strokeLinecap="round" />
+                <line x1="16" y1="33" x2="26" y2="33" stroke="#1e3a8a" strokeWidth="2.5" strokeLinecap="round" />
                 {/* Vertical connections */}
-                <line x1="21" y1="2" x2="21" y2="16" stroke="#DC2626" strokeWidth="2.5" strokeLinecap="round" />
-                <line x1="21" y1="26" x2="21" y2="40" stroke="#DC2626" strokeWidth="2.5" strokeLinecap="round" />
+                <line x1="21" y1="2" x2="21" y2="16" stroke="#1e3a8a" strokeWidth="2.5" strokeLinecap="round" />
+                <line x1="21" y1="26" x2="21" y2="40" stroke="#1e3a8a" strokeWidth="2.5" strokeLinecap="round" />
               </svg>
               <div className="flex flex-col">
                 <span className="text-lg font-bold text-black leading-tight">ANNUAL JERUSALEM</span>
@@ -70,7 +69,7 @@ const Navigation = ({ activeTab, setActiveTab }: NavigationProps) => {
                     ? 'border-b-2'
                     : 'text-black hover:opacity-70'
                 }`}
-                style={activeTab === item.id ? { color: '#DC2626', borderColor: '#DC2626' } : {}}
+                style={activeTab === item.id ? { color: '#1e3a8a', borderColor: '#1e3a8a' } : {}}
               >
                 {item.label.toUpperCase()}
               </button>
@@ -100,7 +99,7 @@ const Navigation = ({ activeTab, setActiveTab }: NavigationProps) => {
                     ? 'bg-red-50'
                     : 'text-black hover:bg-gray-50'
                 }`}
-                style={activeTab === item.id ? { color: '#DC2626' } : {}}
+                style={activeTab === item.id ? { color: '#1e3a8a' } : {}}
               >
                 {item.label}
               </button>
