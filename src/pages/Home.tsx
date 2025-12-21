@@ -97,7 +97,7 @@ const Home = ({ onNavigate }: HomeProps) => {
 
               {/* Call-to-Action Buttons */}
               <div className="flex flex-wrap gap-4 pt-2">
-                <button 
+                <button
                   onClick={() => {
                     if (onNavigate) {
                       onNavigate('registration');
@@ -111,7 +111,7 @@ const Home = ({ onNavigate }: HomeProps) => {
                 >
                   Register Now
                 </button>
-                <button 
+                <button
                   onClick={() => {
                     if (onNavigate) {
                       onNavigate('submissions');
@@ -123,7 +123,7 @@ const Home = ({ onNavigate }: HomeProps) => {
                 >
                   Submit an Abstract
                 </button>
-                <button 
+                <button
                   onClick={() => {
                     if (onNavigate) {
                       onNavigate('conference');
@@ -218,7 +218,7 @@ const Home = ({ onNavigate }: HomeProps) => {
             Discover the key features and opportunities that make this conference a must-attend event
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div 
+            <div
               className="bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 cursor-pointer group"
               onClick={() => {
                 if (onNavigate) {
@@ -233,8 +233,8 @@ const Home = ({ onNavigate }: HomeProps) => {
               <h3 className="text-xl font-bold mb-3 text-gray-900">Scientific Sessions</h3>
               <p className="text-gray-600 leading-relaxed">Engage with cutting-edge research and clinical presentations from leading medical professionals.</p>
             </div>
-            
-            <div 
+
+            <div
               className="bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 cursor-pointer group"
               onClick={() => {
                 if (onNavigate) {
@@ -249,8 +249,8 @@ const Home = ({ onNavigate }: HomeProps) => {
               <h3 className="text-xl font-bold mb-3 text-gray-900">Research Competition</h3>
               <p className="text-gray-600 leading-relaxed">Showcase your research and compete for prestigious awards recognizing excellence in medical research.</p>
             </div>
-            
-            <div 
+
+            <div
               className="bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 cursor-pointer group"
               onClick={() => {
                 if (onNavigate) {
@@ -265,8 +265,8 @@ const Home = ({ onNavigate }: HomeProps) => {
               <h3 className="text-xl font-bold mb-3 text-gray-900">Hands-On Workshops</h3>
               <p className="text-gray-600 leading-relaxed">Participate in practical training sessions and interactive learning experiences with expert guidance.</p>
             </div>
-            
-            <div 
+
+            <div
               className="bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 cursor-pointer group"
               onClick={() => {
                 if (onNavigate) {
@@ -281,8 +281,8 @@ const Home = ({ onNavigate }: HomeProps) => {
               <h3 className="text-xl font-bold mb-3 text-gray-900">Keynote Speakers</h3>
               <p className="text-gray-600 leading-relaxed">Learn from internationally renowned experts sharing insights on the latest healthcare innovations.</p>
             </div>
-            
-            <div 
+
+            <div
               className="bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 cursor-pointer group"
               onClick={() => {
                 if (onNavigate) {
@@ -297,8 +297,8 @@ const Home = ({ onNavigate }: HomeProps) => {
               <h3 className="text-xl font-bold mb-3 text-gray-900">Networking Opportunities</h3>
               <p className="text-gray-600 leading-relaxed">Connect with peers, mentors, and industry leaders to build lasting professional relationships.</p>
             </div>
-            
-            <div 
+
+            <div
               className="bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 cursor-pointer group"
               onClick={() => {
                 if (onNavigate) {
@@ -321,12 +321,12 @@ const Home = ({ onNavigate }: HomeProps) => {
       <section className="py-20 bg-white relative overflow-hidden">
         {/* Subtle light pink gradient from top right */}
         <div className="absolute top-0 right-0 w-1/3 h-1/3 opacity-20" style={{ background: 'radial-gradient(circle at top right, #FCE7F3, transparent)' }}></div>
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center" style={{ color: '#1e3a8a' }}>
             ABOUT THE CONFERENCE
           </h2>
-          
+
           <div className="bg-white rounded-2xl p-8 md:p-12 shadow-xl max-w-5xl mx-auto mb-12">
             <h3 className="text-2xl font-bold mb-6" style={{ color: '#1e3a8a' }}>About the Conference</h3>
             <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-6">
@@ -449,7 +449,7 @@ const Home = ({ onNavigate }: HomeProps) => {
             <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-8">
               The conference offers a rich, diverse, and interactive scientific program, including:
             </p>
-            
+
             <div className="space-y-8">
               <div>
                 <h4 className="text-xl font-bold mb-4 text-gray-900">Keynote & Plenary Sessions</h4>
@@ -603,7 +603,7 @@ const Home = ({ onNavigate }: HomeProps) => {
               The First Annual Jerusalem Medical Conference 2026 represents a milestone in Palestinian medical education and collaboration.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <button 
+              <button
                 onClick={() => {
                   if (onNavigate) {
                     onNavigate('registration');
@@ -615,7 +615,7 @@ const Home = ({ onNavigate }: HomeProps) => {
               >
                 Register Now
               </button>
-              <button 
+              <button
                 onClick={() => {
                   if (onNavigate) {
                     onNavigate('submissions');

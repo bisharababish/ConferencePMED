@@ -107,7 +107,7 @@ const Registration = () => {
 
       toast.dismiss('register');
       toast.success('Registration Completed! Your registration has been submitted successfully. We will contact you shortly with event details.');
-      
+
       // Reset form
       setFormData({
         firstName: '',
@@ -194,7 +194,7 @@ const Registration = () => {
             />
           ))}
         </div>
-        
+
         <div className="max-w-7xl mx-auto text-center relative z-10">
           <div className="flex items-center justify-center gap-4 mb-6">
             <svg width="48" height="48" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-lg">

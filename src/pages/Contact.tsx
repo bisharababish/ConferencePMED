@@ -41,7 +41,7 @@ const Contact = () => {
 
       toast.dismiss('contact');
       toast.success('Message Sent Successfully! Thank you for contacting us. We will get back to you soon.');
-      
+
       setFormData({
         firstName: '',
         lastName: '',
