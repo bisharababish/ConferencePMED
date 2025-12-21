@@ -138,21 +138,15 @@ const Home = ({ onNavigate }: HomeProps) => {
               </div>
             </div>
 
-            {/* Right Side - Image Placeholder */}
+            {/* Right Side - Image */}
             <div className="relative">
-              <div className="rounded-xl overflow-hidden relative shadow-2xl" style={{ zIndex: 10 }}>
-                {/* Replace this div with: <img src="your-image-path.jpg" alt="Jerusalem Medical Conference 2026" className="w-full h-full object-cover" /> */}
-                <div className="bg-gradient-to-br from-blue-50 via-white to-blue-50 aspect-[4/3] flex items-center justify-center border-2" style={{ borderColor: '#1e3a8a' }}>
-                  <div className="text-center p-8">
-                    <div className="mb-4">
-                      <svg className="w-24 h-24 mx-auto" style={{ color: '#1e3a8a' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-                    <p className="text-gray-500 text-sm font-medium">Conference Image</p>
-                    <p className="text-gray-400 text-xs mt-1">Add your image here</p>
-                  </div>
-                </div>
+              <div className="rounded-xl overflow-hidden relative shadow-2xl transform hover:scale-[1.02] transition-transform duration-300" style={{ zIndex: 10 }}>
+                <img
+                  src="/image.jpeg"
+                  alt="Jerusalem Medical Conference 2026"
+                  className="w-full h-full object-cover aspect-[4/3] block"
+                  style={{ minHeight: '300px' }}
+                />
                 {/* Decorative corner elements */}
                 <div className="absolute top-0 left-0 w-20 h-20 border-t-4 border-l-4 rounded-tl-xl" style={{ borderColor: '#1e3a8a', opacity: 0.3 }}></div>
                 <div className="absolute bottom-0 right-0 w-20 h-20 border-b-4 border-r-4 rounded-br-xl" style={{ borderColor: '#1e3a8a', opacity: 0.3 }}></div>
@@ -171,36 +165,38 @@ const Home = ({ onNavigate }: HomeProps) => {
             <div className="flex animate-scroll gap-6 items-center">
               {/* First set of logos */}
               {[
-                { name: 'Logo', id: 1 },
-                { name: 'Circular DESIGN', id: 2 },
-                { name: 'Jerusalem Innovation Park', id: 3 },
-                { name: 'Swiss Agency', id: 4 },
-                { name: 'YOUMNA', id: 5 },
-                { name: 'ALNAYZAK', id: 6 },
-                { name: 'HATA FOUNDATION', id: 7 },
+                { name: 'بنك العربي', nameEn: 'Arab Bank', image: '/bank of palestine.jpeg', id: 1 },
+                { name: 'وزارة الصحة', nameEn: 'Ministry of Health', image: '/ministry of health.jpeg', id: 2 },
+                { name: 'نقابة الاطباء', nameEn: 'Doctors Union', image: '/doctor union.jpeg', id: 3 },
+                { name: 'PMED', nameEn: 'Palestine Medical Club', image: '/pmed.jpeg', id: 4 },
               ].map((logo) => (
                 <div
                   key={logo.id}
-                  className="bg-white rounded-lg p-4 min-w-[150px] h-[150px] flex items-center justify-center shadow-sm border border-gray-200 hover:shadow-md transition-shadow flex-shrink-0"
+                  className="bg-white rounded-lg p-4 min-w-[180px] h-[150px] flex flex-col items-center justify-center shadow-sm border border-gray-200 hover:shadow-md transition-shadow flex-shrink-0"
                 >
-                  <div className="text-gray-400 text-xs text-center">{logo.name}</div>
+                  <img
+                    src={logo.image}
+                    alt={logo.nameEn}
+                    className="w-full h-full object-contain"
+                  />
                 </div>
               ))}
               {/* Duplicate set for seamless loop */}
               {[
-                { name: 'Logo', id: 8 },
-                { name: 'Circular DESIGN', id: 9 },
-                { name: 'Jerusalem Innovation Park', id: 10 },
-                { name: 'Swiss Agency', id: 11 },
-                { name: 'YOUMNA', id: 12 },
-                { name: 'ALNAYZAK', id: 13 },
-                { name: 'HATA FOUNDATION', id: 14 },
+                { name: 'بنك العربي', nameEn: 'Arab Bank', image: '/bank of palestine.jpeg', id: 5 },
+                { name: 'وزارة الصحة', nameEn: 'Ministry of Health', image: '/ministry of health.jpeg', id: 6 },
+                { name: 'نقابة الاطباء', nameEn: 'Doctors Union', image: '/doctor union.jpeg', id: 7 },
+                { name: 'PMED', nameEn: 'Palestine Medical Club', image: '/pmed.jpeg', id: 8 },
               ].map((logo) => (
                 <div
                   key={logo.id}
-                  className="bg-white rounded-lg p-4 min-w-[150px] h-[150px] flex items-center justify-center shadow-sm border border-gray-200 hover:shadow-md transition-shadow flex-shrink-0"
+                  className="bg-white rounded-lg p-4 min-w-[180px] h-[150px] flex flex-col items-center justify-center shadow-sm border border-gray-200 hover:shadow-md transition-shadow flex-shrink-0"
                 >
-                  <div className="text-gray-400 text-xs text-center">{logo.name}</div>
+                  <img
+                    src={logo.image}
+                    alt={logo.nameEn}
+                    className="w-full h-full object-contain"
+                  />
                 </div>
               ))}
             </div>

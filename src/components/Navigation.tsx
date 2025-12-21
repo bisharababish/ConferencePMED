@@ -100,21 +100,21 @@ const Navigation = ({ activeTab, setActiveTab }: NavigationProps) => {
 
       <div
         className={`lg:hidden bg-white border-t border-gray-200 overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen
-            ? 'max-h-96 opacity-100'
-            : 'max-h-0 opacity-0'
+          ? 'max-h-96 opacity-100'
+          : 'max-h-0 opacity-0'
           }`}
       >
         <div className={`px-2 pt-2 pb-3 space-y-1 transform transition-all duration-300 ${mobileMenuOpen
-            ? 'translate-y-0 opacity-100'
-            : '-translate-y-4 opacity-0'
+          ? 'translate-y-0 opacity-100'
+          : '-translate-y-4 opacity-0'
           }`}>
           {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => handleTabClick(item.id)}
               className={`block w-full text-left px-3 py-3 rounded-md text-base font-medium transition-all duration-300 ${activeTab === item.id
-                  ? 'bg-blue-50'
-                  : 'text-black hover:bg-gray-50'
+                ? 'bg-blue-50'
+                : 'text-black hover:bg-gray-50'
                 }`}
               style={activeTab === item.id ? { color: '#1e3a8a' } : {}}
             >
