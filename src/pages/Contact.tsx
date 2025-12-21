@@ -90,17 +90,45 @@ const Contact = () => {
       </div>
 
       {/* Header */}
-      <div className="relative bg-gradient-to-r py-12 px-4 shadow-lg" style={{ background: 'linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%)' }}>
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-3 animate-fade-in">
-            <div className="animate-bounce-slow">
-              <MessageSquare className="text-white" size={42} />
-            </div>
+      <div className="relative bg-gradient-to-r py-16 px-4 overflow-hidden" style={{ background: 'linear-gradient(to right, #1e3a8a, #1e40af)' }}>
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden opacity-10">
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute rounded-full animate-float"
+              style={{
+                width: `${Math.random() * 12 + 4}px`,
+                height: `${Math.random() * 12 + 4}px`,
+                backgroundColor: 'white',
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${Math.random() * 15 + 10}s`,
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="max-w-7xl mx-auto text-center relative z-10">
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <svg width="48" height="48" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-lg">
+              <rect x="2" y="2" width="14" height="14" fill="white" rx="1.5" />
+              <rect x="26" y="2" width="14" height="14" fill="white" rx="1.5" />
+              <rect x="2" y="26" width="14" height="14" fill="white" rx="1.5" />
+              <rect x="26" y="26" width="14" height="14" fill="white" rx="1.5" />
+              <line x1="16" y1="9" x2="26" y2="9" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="16" y1="33" x2="26" y2="33" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="21" y1="2" x2="21" y2="16" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="21" y1="26" x2="21" y2="40" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+            </svg>
             <div className="flex flex-col">
-              <span className="text-3xl md:text-4xl font-bold text-white leading-tight">Contact Us</span>
-              <span className="text-sm md:text-base text-blue-100 leading-tight mt-1">Get in Touch with Us</span>
+              <span className="text-3xl md:text-4xl font-bold text-white leading-tight drop-shadow-md">ANNUAL JERUSALEM</span>
+              <span className="text-base md:text-lg text-white leading-tight drop-shadow-md">MEDICAL & RESEARCH CONFERENCE</span>
             </div>
           </div>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-md">Contact Us</h1>
+          <p className="text-white/90 text-lg md:text-xl max-w-3xl mx-auto">Get in Touch with Us</p>
         </div>
       </div>
 
@@ -116,8 +144,8 @@ const Contact = () => {
                 </div>
                 <div className="flex-1">
                   <h3 className="font-bold text-lg text-gray-900 mb-1">Email</h3>
-                  <p className="text-sm text-gray-600 mb-2">[Email address to be added]</p>
-                  <a href="mailto:" className="text-sm font-medium" style={{ color: '#1e3a8a' }}>
+                  <p className="text-sm text-gray-600 mb-2">info@jmrc-palestine.com</p>
+                  <a href="mailto:info@jmrc-palestine.com" className="text-sm font-medium" style={{ color: '#1e3a8a' }}>
                     Send Email →
                   </a>
                 </div>
@@ -131,8 +159,8 @@ const Contact = () => {
                 </div>
                 <div className="flex-1">
                   <h3 className="font-bold text-lg text-gray-900 mb-1">Phone</h3>
-                  <p className="text-sm text-gray-600 mb-2">[Contact information to be added]</p>
-                  <a href="tel:" className="text-sm font-medium" style={{ color: '#1e3a8a' }}>
+                  <p className="text-sm text-gray-600 mb-2">+970 2 XXX XXXX</p>
+                  <a href="tel:+9702XXXXXXX" className="text-sm font-medium" style={{ color: '#1e3a8a' }}>
                     Call Now →
                   </a>
                 </div>
@@ -146,8 +174,8 @@ const Contact = () => {
                 </div>
                 <div className="flex-1">
                   <h3 className="font-bold text-lg text-gray-900 mb-1">Location</h3>
-                  <p className="text-sm text-gray-600 mb-2">[Location to be added]</p>
-                  <a href="#" className="text-sm font-medium" style={{ color: '#1e3a8a' }}>
+                  <p className="text-sm text-gray-600 mb-2">Millennium Hotel, Ramallah</p>
+                  <a href="https://maps.google.com/?q=Millennium+Hotel+Ramallah" target="_blank" rel="noopener noreferrer" className="text-sm font-medium" style={{ color: '#1e3a8a' }}>
                     View Map →
                   </a>
                 </div>
@@ -161,7 +189,7 @@ const Contact = () => {
                 </div>
                 <div className="flex-1">
                   <h3 className="font-bold text-lg text-gray-900 mb-1">Instagram</h3>
-                  <p className="text-sm text-gray-600 mb-2">Follow us on Instagram</p>
+                  <p className="text-sm text-gray-600 mb-2">@jmrc_palestine</p>
                   <a
                     href="https://www.instagram.com/jmrc_palestine/?utm_source=qr#"
                     target="_blank"
@@ -176,29 +204,39 @@ const Contact = () => {
             </div>
 
             {/* Social Media Quick Links */}
-            <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl p-6 shadow-xl text-white">
-              <h3 className="font-bold text-lg mb-4">Connect With Us</h3>
-              <div className="flex gap-3">
-                <a
-                  href="https://www.facebook.com/people/%D9%85%D9%88%D8%AA%D9%85%D8%B1-%D8%A7%D9%84%D9%82%D8%AF%D8%B3-%D8%A7%D9%84%D8%B7%D8%A8%D9%8A-%D9%88%D8%A7%D9%84%D8%A8%D8%AD%D8%AB%D9%8A-%D8%A7%D9%84%D8%A7%D9%88%D9%84/61584929072289/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 bg-white/20 rounded-lg hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
-                  aria-label="Facebook"
-                >
-                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            <div className="bg-gradient-to-br from-white to-blue-50 rounded-2xl p-6 shadow-xl border-2 border-gray-200 hover:shadow-2xl hover:border-blue-300 transition-all duration-300 transform hover:-translate-y-1">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="p-4 rounded-xl shadow-lg" style={{ backgroundColor: '#1e3a8a', color: 'white' }}>
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
-                </a>
-                <a
-                  href="https://www.instagram.com/jmrc_palestine/?utm_source=qr#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 bg-white/20 rounded-lg hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
-                  aria-label="Instagram"
-                >
-                  <Instagram size={24} />
-                </a>
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-bold text-lg text-gray-900 mb-1">Connect With Us</h3>
+                  <p className="text-sm text-gray-600 mb-4">Follow us on social media for updates</p>
+                  <div className="flex gap-3">
+                    <a
+                      href="https://www.facebook.com/people/%D9%85%D9%88%D8%AA%D9%85%D8%B1-%D8%A7%D9%84%D9%82%D8%AF%D8%B3-%D8%A7%D9%84%D8%B7%D8%A8%D9%8A-%D9%88%D8%A7%D9%84%D8%A8%D8%AD%D8%AB%D9%8A-%D8%A7%D9%84%D8%A7%D9%88%D9%84/61584929072289/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-110 border border-gray-200 hover:border-blue-300"
+                      aria-label="Facebook"
+                    >
+                      <svg className="w-6 h-6" fill="#1e3a8a" viewBox="0 0 24 24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                      </svg>
+                    </a>
+                    <a
+                      href="https://www.instagram.com/jmrc_palestine/?utm_source=qr#"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-110 border border-gray-200 hover:border-blue-300"
+                      aria-label="Instagram"
+                    >
+                      <Instagram size={24} style={{ color: '#1e3a8a' }} />
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

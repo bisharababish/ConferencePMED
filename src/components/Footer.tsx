@@ -12,25 +12,25 @@ const Footer = () => {
               <div className="flex items-start">
                 <Mail className="text-gray-600 mr-3 mt-1 flex-shrink-0" size={20} />
                 <p className="text-gray-700 text-sm">
-                  <strong>Email:</strong> [Email address to be added]
+                  <strong>Email:</strong> info@jmrc-palestine.com
                 </p>
               </div>
               <div className="flex items-start">
                 <Instagram className="text-gray-600 mr-3 mt-1 flex-shrink-0" size={20} />
                 <p className="text-gray-700 text-sm">
-                  <strong>Instagram:</strong> [Instagram handle to be added]
+                  <strong>Instagram:</strong> @jmrc_palestine
                 </p>
               </div>
               <div className="flex items-start">
                 <MapPin className="text-gray-600 mr-3 mt-1 flex-shrink-0" size={20} />
                 <p className="text-gray-700 text-sm">
-                  <strong>Location:</strong> [Location to be added]
+                  <strong>Location:</strong> Millennium Hotel, Ramallah
                 </p>
               </div>
               <div className="flex items-start">
                 <Phone className="text-gray-600 mr-3 mt-1 flex-shrink-0" size={20} />
                 <p className="text-gray-700 text-sm">
-                  <strong>Contact us:</strong> [Contact information to be added]
+                  <strong>Contact us:</strong> +970 2 XXX XXXX
                 </p>
               </div>
             </div>
