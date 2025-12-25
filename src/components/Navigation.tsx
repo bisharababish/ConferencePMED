@@ -12,7 +12,7 @@ const Navigation = ({ activeTab, setActiveTab }: NavigationProps) => {
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'conference', label: 'Conference Information' },
-    { id: 'submissions', label: 'Submissions' },
+    { id: 'submissions', label: 'Abstract Submission' },
     { id: 'registration', label: 'Registration' },
     { id: 'contact', label: 'Contact Us' },
   ];
@@ -31,29 +31,18 @@ const Navigation = ({ activeTab, setActiveTab }: NavigationProps) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center gap-3">
-            {/* Network icon logo */}
+            {/* Logo */}
             <button
               onClick={() => handleTabClick('home')}
               className="flex items-center gap-3 hover:opacity-80 transition-opacity"
             >
-              <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* Top left square */}
-                <rect x="2" y="2" width="14" height="14" fill="#1e3a8a" rx="1.5" />
-                {/* Top right square */}
-                <rect x="26" y="2" width="14" height="14" fill="#1e3a8a" rx="1.5" />
-                {/* Bottom left square */}
-                <rect x="2" y="26" width="14" height="14" fill="#1e3a8a" rx="1.5" />
-                {/* Bottom right square */}
-                <rect x="26" y="26" width="14" height="14" fill="#1e3a8a" rx="1.5" />
-                {/* Horizontal connections */}
-                <line x1="16" y1="9" x2="26" y2="9" stroke="#1e3a8a" strokeWidth="2.5" strokeLinecap="round" />
-                <line x1="16" y1="33" x2="26" y2="33" stroke="#1e3a8a" strokeWidth="2.5" strokeLinecap="round" />
-                {/* Vertical connections */}
-                <line x1="21" y1="2" x2="21" y2="16" stroke="#1e3a8a" strokeWidth="2.5" strokeLinecap="round" />
-                <line x1="21" y1="26" x2="21" y2="40" stroke="#1e3a8a" strokeWidth="2.5" strokeLinecap="round" />
-              </svg>
+              <img
+                src="/logo .jpeg"
+                alt="Conference Logo"
+                className="h-16 w-auto object-contain"
+              />
               <div className="flex flex-col">
-                <span className="text-lg font-bold text-black leading-tight">ANNUAL JERUSALEM</span>
+                <span className="text-lg font-bold text-black leading-tight">JERUSALEM</span>
                 <span className="text-xs text-black leading-tight">MEDICAL & RESEARCH CONFERENCE</span>
               </div>
             </button>

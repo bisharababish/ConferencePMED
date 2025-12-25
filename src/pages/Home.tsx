@@ -1,4 +1,3 @@
-import { BookOpen, Trophy, FlaskConical, Mic, Users, Building2 } from 'lucide-react';
 
 interface HomeProps {
   onNavigate?: (tab: string) => void;
@@ -62,9 +61,9 @@ const Home = ({ onNavigate }: HomeProps) => {
 
               {/* Headline */}
               <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
-                <span className="text-black">The First Annual</span>{' '}
-                <span style={{ color: '#1e3a8a' }}>Jerusalem Medical</span>{' '}
-                <span style={{ color: '#1e3a8a' }}>Conference 2026</span>
+                <span className="text-black">The First</span>{' '}
+                <span style={{ color: '#1e3a8a' }}>Jerusalem Medical and Research</span>{' '}
+                <span style={{ color: '#1e3a8a' }}>Conference</span>
               </h1>
 
               {/* Date and Venue Info */}
@@ -81,12 +80,6 @@ const Home = ({ onNavigate }: HomeProps) => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                   <span className="font-semibold">📍 Millennium Hotel, Ramallah</span>
-                </div>
-                <div className="flex items-center gap-3 text-lg text-gray-700">
-                  <svg className="w-5 h-5" style={{ color: '#1e3a8a' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
-                  <span className="font-semibold">👥 Expected Attendance: 500–700 Participants</span>
                 </div>
               </div>
 
@@ -165,7 +158,7 @@ const Home = ({ onNavigate }: HomeProps) => {
             <div className="flex animate-scroll gap-6 items-center">
               {/* First set of logos */}
               {[
-                { name: 'بنك العربي', nameEn: 'Arab Bank', image: '/bank of palestine.jpeg', id: 1 },
+                { name: 'بنك العربي', nameEn: 'Arab Bank', image: '/arab bank.jpg', id: 1 },
                 { name: 'وزارة الصحة', nameEn: 'Ministry of Health', image: '/ministry of health.jpeg', id: 2 },
                 { name: 'نقابة الاطباء', nameEn: 'Doctors Union', image: '/doctor union.jpeg', id: 3 },
                 { name: 'PMED', nameEn: 'Palestine Medical Club', image: '/pmed.jpeg', id: 4 },
@@ -183,7 +176,7 @@ const Home = ({ onNavigate }: HomeProps) => {
               ))}
               {/* Duplicate set for seamless loop */}
               {[
-                { name: 'بنك العربي', nameEn: 'Arab Bank', image: '/bank of palestine.jpeg', id: 5 },
+                { name: 'بنك العربي', nameEn: 'Arab Bank', image: '/arab bank.jpg', id: 5 },
                 { name: 'وزارة الصحة', nameEn: 'Ministry of Health', image: '/ministry of health.jpeg', id: 6 },
                 { name: 'نقابة الاطباء', nameEn: 'Doctors Union', image: '/doctor union.jpeg', id: 7 },
                 { name: 'PMED', nameEn: 'Palestine Medical Club', image: '/pmed.jpeg', id: 8 },
@@ -204,114 +197,6 @@ const Home = ({ onNavigate }: HomeProps) => {
         </div>
       </section>
 
-      {/* Conference Highlights Section */}
-      <section className="py-16 bg-gradient-to-b from-white to-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center" style={{ color: '#1e3a8a' }}>
-            Conference Highlights
-          </h2>
-          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            Discover the key features and opportunities that make this conference a must-attend event
-          </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div
-              className="bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 cursor-pointer group"
-              onClick={() => {
-                if (onNavigate) {
-                  onNavigate('conference');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-              }}
-            >
-              <div className="w-16 h-16 rounded-xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110" style={{ backgroundColor: '#DBEAFE' }}>
-                <BookOpen size={32} style={{ color: '#1e3a8a' }} />
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900">Scientific Sessions</h3>
-              <p className="text-gray-600 leading-relaxed">Engage with cutting-edge research and clinical presentations from leading medical professionals.</p>
-            </div>
-
-            <div
-              className="bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 cursor-pointer group"
-              onClick={() => {
-                if (onNavigate) {
-                  onNavigate('submissions');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-              }}
-            >
-              <div className="w-16 h-16 rounded-xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110" style={{ backgroundColor: '#FEF3C7' }}>
-                <Trophy size={32} style={{ color: '#92400E' }} />
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900">Research Competition</h3>
-              <p className="text-gray-600 leading-relaxed">Showcase your research and compete for prestigious awards recognizing excellence in medical research.</p>
-            </div>
-
-            <div
-              className="bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 cursor-pointer group"
-              onClick={() => {
-                if (onNavigate) {
-                  onNavigate('conference');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-              }}
-            >
-              <div className="w-16 h-16 rounded-xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110" style={{ backgroundColor: '#DBEAFE' }}>
-                <FlaskConical size={32} style={{ color: '#1e3a8a' }} />
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900">Hands-On Workshops</h3>
-              <p className="text-gray-600 leading-relaxed">Participate in practical training sessions and interactive learning experiences with expert guidance.</p>
-            </div>
-
-            <div
-              className="bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 cursor-pointer group"
-              onClick={() => {
-                if (onNavigate) {
-                  onNavigate('conference');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-              }}
-            >
-              <div className="w-16 h-16 rounded-xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110" style={{ backgroundColor: '#FEF3C7' }}>
-                <Mic size={32} style={{ color: '#92400E' }} />
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900">Keynote Speakers</h3>
-              <p className="text-gray-600 leading-relaxed">Learn from internationally renowned experts sharing insights on the latest healthcare innovations.</p>
-            </div>
-
-            <div
-              className="bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 cursor-pointer group"
-              onClick={() => {
-                if (onNavigate) {
-                  onNavigate('conference');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-              }}
-            >
-              <div className="w-16 h-16 rounded-xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110" style={{ backgroundColor: '#DBEAFE' }}>
-                <Users size={32} style={{ color: '#1e3a8a' }} />
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900">Networking Opportunities</h3>
-              <p className="text-gray-600 leading-relaxed">Connect with peers, mentors, and industry leaders to build lasting professional relationships.</p>
-            </div>
-
-            <div
-              className="bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 cursor-pointer group"
-              onClick={() => {
-                if (onNavigate) {
-                  onNavigate('conference');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-              }}
-            >
-              <div className="w-16 h-16 rounded-xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110" style={{ backgroundColor: '#FEF3C7' }}>
-                <Building2 size={32} style={{ color: '#92400E' }} />
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900">Exhibitions</h3>
-              <p className="text-gray-600 leading-relaxed">Explore the latest medical innovations, technologies, and solutions from industry leaders.</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* About Section */}
       <section className="py-20 bg-white relative overflow-hidden">
@@ -324,23 +209,17 @@ const Home = ({ onNavigate }: HomeProps) => {
           </h2>
 
           <div className="bg-white rounded-2xl p-8 md:p-12 shadow-xl max-w-5xl mx-auto mb-12">
-            <h3 className="text-2xl font-bold mb-6" style={{ color: '#1e3a8a' }}>About the Conference</h3>
-            <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-6">
-              The First Annual Jerusalem Medical Conference 2026 is a multidisciplinary medical and scientific conference organized by the <strong style={{ color: '#1e3a8a' }}>Medical Association – Jerusalem Center</strong>, with the support of the <strong style={{ color: '#1e3a8a' }}>Palestine Medical Club (PMED Club)</strong>.
+            <h3 className="text-2xl font-bold mb-6 text-center" style={{ color: '#1e3a8a' }}>About the Conference</h3>
+            <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-6 text-center">
+              The First Jerusalem Medical and Research Conference is a multidisciplinary medical and scientific conference organized by the <strong style={{ color: '#1e3a8a' }}>Medical Association – Jerusalem Center</strong>, with the support of the <strong style={{ color: '#1e3a8a' }}>Palestine Medical Club (PMED Club)</strong>.
             </p>
-            <p className="text-base md:text-lg text-gray-700 leading-relaxed">
-              This conference marks the launch of an annual national platform dedicated to continuous medical education, scientific exchange, leadership development, and healthcare innovation in Palestine. It brings together medical students, residents, specialists, consultants, researchers, and allied health professionals for a full day of high-level scientific and professional engagement.
+            <p className="text-base md:text-lg text-gray-700 leading-relaxed text-center">
+              This conference marks the launch of a national platform dedicated to continuous medical education, scientific exchange, leadership development, and healthcare innovation in Palestine. It brings together medical students, residents, specialists, consultants, researchers, and allied health professionals for a full day of high-level scientific and professional engagement.
             </p>
           </div>
 
           {/* Vision and Mission */}
           <div className="grid md:grid-cols-2 gap-8 mb-12">
-            <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-8 shadow-lg border-l-4" style={{ borderLeftColor: '#1e3a8a', borderLeftWidth: '6px' }}>
-              <h3 className="text-2xl font-bold mb-4" style={{ color: '#1e3a8a' }}>Vision</h3>
-              <p className="text-gray-700 leading-relaxed">
-                To create a sustainable, high-quality annual medical conference that strengthens healthcare systems in Palestine by empowering healthcare professionals with knowledge, skills, innovation, and collaboration.
-              </p>
-            </div>
             <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-8 shadow-lg border-l-4" style={{ borderLeftColor: '#1e3a8a', borderLeftWidth: '6px' }}>
               <h3 className="text-2xl font-bold mb-4" style={{ color: '#1e3a8a' }}>Mission</h3>
               <ul className="space-y-2 text-gray-700">
@@ -352,35 +231,12 @@ const Home = ({ onNavigate }: HomeProps) => {
                 <li>• Enhance healthcare quality and patient outcomes in Palestine</li>
               </ul>
             </div>
-          </div>
-
-          {/* Mission */}
-          <div className="bg-white rounded-2xl p-8 md:p-12 shadow-xl mb-12">
-            <h3 className="text-2xl font-bold mb-6" style={{ color: '#1e3a8a' }}>Why This Conference Matters</h3>
-            <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-6">
-              Healthcare professionals in Palestine face unique clinical, educational, and systemic challenges. This conference provides a rare and vital opportunity to:
-            </p>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="flex items-start gap-3">
-                <div className="text-xl" style={{ color: '#1e3a8a' }}>●</div>
-                <p className="text-gray-700">Exchange knowledge across specialties</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="text-xl" style={{ color: '#1e3a8a' }}>●</div>
-                <p className="text-gray-700">Learn from international and local experts</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="text-xl" style={{ color: '#1e3a8a' }}>●</div>
-                <p className="text-gray-700">Present and discuss cutting-edge research</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="text-xl" style={{ color: '#1e3a8a' }}>●</div>
-                <p className="text-gray-700">Develop leadership and practical skills</p>
-              </div>
+            <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-8 shadow-lg border-l-4" style={{ borderLeftColor: '#1e3a8a', borderLeftWidth: '6px' }}>
+              <h3 className="text-2xl font-bold mb-4" style={{ color: '#1e3a8a' }}>Vision</h3>
+              <p className="text-gray-700 leading-relaxed">
+                To create a sustainable, high-quality medical conference that strengthens healthcare systems in Palestine by empowering healthcare professionals with knowledge, skills, innovation, and collaboration.
+              </p>
             </div>
-            <p className="text-base md:text-lg text-gray-700 leading-relaxed mt-6 font-semibold">
-              The conference aims to serve as a national hub for medical excellence and leadership development.
-            </p>
           </div>
 
           {/* Why This Conference Matters */}
@@ -412,59 +268,15 @@ const Home = ({ onNavigate }: HomeProps) => {
             </p>
           </div>
 
-          {/* Target Audience */}
-          <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-8 md:p-12 shadow-xl mb-12">
-            <h3 className="text-2xl font-bold mb-6" style={{ color: '#1e3a8a' }}>Target Audience</h3>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="flex items-start gap-3">
-                <div className="text-xl" style={{ color: '#1e3a8a' }}>●</div>
-                <p className="text-gray-700">Medical students</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="text-xl" style={{ color: '#1e3a8a' }}>●</div>
-                <p className="text-gray-700">Residents across all specialties</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="text-xl" style={{ color: '#1e3a8a' }}>●</div>
-                <p className="text-gray-700">Specialists and consultants</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="text-xl" style={{ color: '#1e3a8a' }}>●</div>
-                <p className="text-gray-700">Allied health professionals</p>
-              </div>
-              <div className="flex items-start gap-3 md:col-span-2">
-                <div className="text-xl" style={{ color: '#1e3a8a' }}>●</div>
-                <p className="text-gray-700">Medical researchers and academics</p>
-              </div>
-            </div>
-          </div>
 
           {/* Scientific Program Overview */}
           <div className="bg-white rounded-2xl p-8 md:p-12 shadow-xl mb-12">
-            <h3 className="text-2xl font-bold mb-6" style={{ color: '#1e3a8a' }}>Scientific Program / Conference Tracks</h3>
+            <h3 className="text-2xl font-bold mb-6" style={{ color: '#1e3a8a' }}>Scientific Program - Conference Tracks</h3>
             <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-8">
               The conference offers a rich, diverse, and interactive scientific program, including:
             </p>
 
             <div className="space-y-8">
-              <div>
-                <h4 className="text-xl font-bold mb-4 text-gray-900">Keynote & Plenary Sessions</h4>
-                <div className="bg-gray-50 rounded-lg p-6 space-y-3">
-                  <div className="flex items-start gap-3">
-                    <div className="text-xl" style={{ color: '#1e3a8a' }}>●</div>
-                    <p className="text-gray-700">The future of medicine in the region</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="text-xl" style={{ color: '#1e3a8a' }}>●</div>
-                    <p className="text-gray-700">Digital transformation and artificial intelligence in healthcare</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="text-xl" style={{ color: '#1e3a8a' }}>●</div>
-                    <p className="text-gray-700">Public health challenges and opportunities in Palestine</p>
-                  </div>
-                </div>
-              </div>
-
               <div>
                 <h4 className="text-xl font-bold mb-4 text-gray-900">Parallel Specialty Scientific Sessions</h4>
                 <p className="text-gray-700 mb-4">Tracks may include:</p>
@@ -514,71 +326,25 @@ const Home = ({ onNavigate }: HomeProps) => {
                 </div>
               </div>
 
-              <div>
-                <h4 className="text-xl font-bold mb-4 text-gray-900">Supporting the Next Generation</h4>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="bg-gradient-to-br from-blue-50 to-white rounded-lg p-6 border-l-4" style={{ borderLeftColor: '#1e3a8a' }}>
-                    <h5 className="font-bold mb-3 text-gray-900">Young Investigator & Student Sessions</h5>
-                    <ul className="space-y-2 text-sm text-gray-700">
-                      <li>• Research pathways and publishing guidance</li>
-                      <li>• Career development in medicine</li>
-                      <li>• Residency application strategies</li>
-                      <li>• Mentorship and leadership development</li>
-                    </ul>
-                  </div>
-                  <div className="bg-gradient-to-br from-blue-50 to-white rounded-lg p-6 border-l-4" style={{ borderLeftColor: '#1e3a8a' }}>
-                    <h5 className="font-bold mb-3 text-gray-900">Meet-the-Expert Sessions</h5>
-                    <ul className="space-y-2 text-sm text-gray-700">
-                      <li>• Informal discussions with senior specialists</li>
-                      <li>• Career advice and professional guidance</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <h4 className="text-xl font-bold mb-4 text-gray-900">Industry, Innovation & Community Engagement</h4>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="bg-gradient-to-br from-blue-50 to-white rounded-lg p-6 border-l-4" style={{ borderLeftColor: '#1e3a8a' }}>
-                    <h5 className="font-bold mb-3 text-gray-900">Industry & Innovation Showcase</h5>
-                    <ul className="space-y-2 text-sm text-gray-700">
-                      <li>• Medical devices</li>
-                      <li>• Digital health solutions</li>
-                      <li>• Pharmaceutical and healthcare partners</li>
-                    </ul>
-                  </div>
-                  <div className="bg-gradient-to-br from-blue-50 to-white rounded-lg p-6 border-l-4" style={{ borderLeftColor: '#1e3a8a' }}>
-                    <h5 className="font-bold mb-3 text-gray-900">Public Health & Community Outreach</h5>
-                    <ul className="space-y-2 text-sm text-gray-700">
-                      <li>• Open awareness sessions</li>
-                      <li>• Chronic disease prevention</li>
-                      <li>• Lifestyle and health education</li>
-                      <li>• Community engagement and public Q&A</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <h4 className="text-xl font-bold mb-4 text-gray-900">Networking & Professional Growth</h4>
-                <p className="text-gray-700 mb-4">The conference provides multiple opportunities for meaningful networking through:</p>
-                <div className="grid md:grid-cols-2 gap-3">
-                  {['Coffee breaks and networking lunch', 'Exhibition areas', 'Social and cultural events', 'Optional conference dinner'].map((item) => (
-                    <div key={item} className="flex items-start gap-3 bg-gray-50 rounded-lg p-4">
-                      <div className="text-lg" style={{ color: '#1e3a8a' }}>●</div>
-                      <p className="text-gray-700">{item}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
             </div>
           </div>
 
           {/* Venue */}
-          <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-8 md:p-12 shadow-xl mb-12">
+          <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-8 md:p-12 shadow-xl mb-12 overflow-hidden">
             <h3 className="text-2xl font-bold mb-6" style={{ color: '#1e3a8a' }}>Venue</h3>
-            <h4 className="text-xl font-bold mb-4 text-gray-900">Millennium Hotel Ramallah</h4>
-            <p className="text-gray-700 mb-6">Located in Al-Masyoun, Ramallah…</p>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <h4 className="text-xl font-bold mb-4 text-gray-900">Millennium Hotel Ramallah</h4>
+                <p className="text-gray-700">Located in Al-Masyoun, Ramallah…</p>
+              </div>
+              <div className="rounded-xl overflow-hidden shadow-sm border border-gray-200">
+                <img
+                  src="/millennuim.jpeg"
+                  alt="Millennium Hotel Ramallah"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
           </div>
 
           {/* Organized By */}
@@ -659,7 +425,7 @@ const Home = ({ onNavigate }: HomeProps) => {
           <div className="bg-gradient-to-r rounded-2xl p-8 md:p-12 shadow-xl text-center text-white" style={{ background: 'linear-gradient(to right, #1e3a8a, #1e40af)' }}>
             <h3 className="text-3xl font-bold mb-4">Join Us in Shaping the Future of Healthcare</h3>
             <p className="text-lg mb-6 text-white/90">
-              The First Annual Jerusalem Medical Conference 2026 represents a milestone in Palestinian medical education and collaboration.
+              The First Jerusalem Medical and Research Conference represents a milestone in Palestinian medical education and collaboration.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <button

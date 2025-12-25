@@ -52,9 +52,9 @@ const Footer = () => {
                   <line x1="21" y1="26" x2="21" y2="40" stroke="#1e3a8a" strokeWidth="2.5" strokeLinecap="round" />
                 </svg>
                 <div>
-                  <div className="text-lg font-bold text-gray-900">THE FIRST ANNUAL</div>
+                  <div className="text-lg font-bold text-gray-900">THE FIRST</div>
                   <div className="text-lg font-bold text-gray-900">JERUSALEM MEDICAL</div>
-                  <div className="text-lg font-bold text-gray-900">CONFERENCE 2026</div>
+                  <div className="text-lg font-bold text-gray-900">AND RESEARCH CONFERENCE</div>
                 </div>
               </div>
             </div>

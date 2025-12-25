@@ -81,3 +81,4 @@ ON contacts FOR INSERT
 TO public
 WITH CHECK (true);
 
+

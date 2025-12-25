@@ -142,15 +142,131 @@ const Registration = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+
+    // Validate phone number to only accept numbers, +, spaces, dashes, and parentheses
+    if (name === 'phone') {
+      // Filter out invalid characters instead of just showing an error
+      const filteredValue = value.split('').filter(char => /[\d\s\+\-\(\)]/.test(char)).join('');
+      if (filteredValue !== value) {
+        toast.error('Phone number can only contain numbers and formatting characters (+, -, spaces, parentheses)');
+        // Update with filtered value to prevent invalid characters from being entered
+        setFormData({
+          ...formData,
+          [name]: filteredValue,
+        });
+        return;
+      }
+    }
+
     setFormData({
       ...formData,
       [name]: value,
     });
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const validateImageFile = async (file: File): Promise<boolean> => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const arrayBuffer = e.target?.result as ArrayBuffer;
+        const bytes = new Uint8Array(arrayBuffer);
+
+        // Check file signatures (magic bytes)
+        // JPEG: FF D8 FF
+        // PNG: 89 50 4E 47 0D 0A 1A 0A
+        // GIF: 47 49 46 38 (GIF8)
+        const isJPEG = bytes[0] === 0xFF && bytes[1] === 0xD8 && bytes[2] === 0xFF;
+        const isPNG = bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4E && bytes[3] === 0x47;
+        const isGIF = bytes[0] === 0x47 && bytes[1] === 0x49 && bytes[2] === 0x46 && bytes[3] === 0x38;
+
+        resolve(isJPEG || isPNG || isGIF);
+      };
+      reader.onerror = () => resolve(false);
+      reader.readAsArrayBuffer(file.slice(0, 8)); // Read first 8 bytes
+    });
+  };
+
+  const validatePDFFile = async (file: File): Promise<boolean> => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const arrayBuffer = e.target?.result as ArrayBuffer;
+        const bytes = new Uint8Array(arrayBuffer);
+
+        // PDF: 25 50 44 46 (%PDF)
+        const isPDF = bytes[0] === 0x25 && bytes[1] === 0x50 && bytes[2] === 0x44 && bytes[3] === 0x46;
+        resolve(isPDF);
+      };
+      reader.onerror = () => resolve(false);
+      reader.readAsArrayBuffer(file.slice(0, 4)); // Read first 4 bytes
+    });
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
     const file = e.target.files?.[0] || null;
+
+    if (!file) {
+      setFormData({
+        ...formData,
+        [name]: null,
+      });
+      return;
+    }
+
+    // Validate file type based on the input name
+    const fileName = file.name.toLowerCase();
+    const fileExtension = fileName.split('.').pop() || '';
+
+    if (name === 'idUpload' || name === 'studentCardUpload') {
+      // Only allow image files
+      const allowedImageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+      const allowedImageTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+
+      // Check extension and MIME type
+      if (!allowedImageExtensions.includes(fileExtension) || !allowedImageTypes.includes(file.type)) {
+        toast.error('Invalid file type. Please upload an image file (JPG, JPEG, PNG, or GIF).');
+        e.target.value = ''; // Clear the input
+        return;
+      }
+
+      // Validate actual file content (magic bytes) to prevent spoofed files
+      const isValidImage = await validateImageFile(file);
+      if (!isValidImage) {
+        toast.error('Invalid file content. The file does not appear to be a valid image. Please upload a real image file (JPG, JPEG, PNG, or GIF).');
+        e.target.value = ''; // Clear the input
+        return;
+      }
+    } else if (name === 'paymentReceipt') {
+      // Allow images and PDF
+      const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'pdf'];
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'application/pdf'];
+
+      // Check extension and MIME type
+      if (!allowedExtensions.includes(fileExtension) || !allowedTypes.includes(file.type)) {
+        toast.error('Invalid file type. Please upload an image file (JPG, JPEG, PNG, GIF) or PDF.');
+        e.target.value = ''; // Clear the input
+        return;
+      }
+
+      // Validate actual file content
+      if (fileExtension === 'pdf') {
+        const isValidPDF = await validatePDFFile(file);
+        if (!isValidPDF) {
+          toast.error('Invalid file content. The file does not appear to be a valid PDF. Please upload a real PDF file.');
+          e.target.value = ''; // Clear the input
+          return;
+        }
+      } else {
+        const isValidImage = await validateImageFile(file);
+        if (!isValidImage) {
+          toast.error('Invalid file content. The file does not appear to be a valid image. Please upload a real image file (JPG, JPEG, PNG, or GIF).');
+          e.target.value = ''; // Clear the input
+          return;
+        }
+      }
+    }
+
     setFormData({
       ...formData,
       [name]: file,
@@ -208,7 +324,7 @@ const Registration = () => {
               <line x1="21" y1="26" x2="21" y2="40" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
             </svg>
             <div className="flex flex-col">
-              <span className="text-3xl md:text-4xl font-bold text-white leading-tight drop-shadow-md">ANNUAL JERUSALEM</span>
+              <span className="text-3xl md:text-4xl font-bold text-white leading-tight drop-shadow-md">JERUSALEM</span>
               <span className="text-base md:text-lg text-white leading-tight drop-shadow-md">MEDICAL & RESEARCH CONFERENCE</span>
             </div>
           </div>
