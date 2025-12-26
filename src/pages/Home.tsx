@@ -1,9 +1,41 @@
+import { useState, useEffect } from 'react';
 
 interface HomeProps {
   onNavigate?: (tab: string) => void;
 }
 
 const Home = ({ onNavigate }: HomeProps) => {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
+  useEffect(() => {
+    const targetDate = new Date('2026-01-30T00:00:00').getTime();
+
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((difference % (1000 * 60)) / 1000),
+        });
+      } else {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      }
+    };
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -72,14 +104,14 @@ const Home = ({ onNavigate }: HomeProps) => {
                   <svg className="w-5 h-5" style={{ color: '#1e3a8a' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                  <span className="font-semibold">📅 30 January 2026</span>
+                  <span className="font-semibold">30 January 2026</span>
                 </div>
                 <div className="flex items-center gap-3 text-lg text-gray-700">
                   <svg className="w-5 h-5" style={{ color: '#1e3a8a' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  <span className="font-semibold">📍 Millennium Hotel, Ramallah</span>
+                  <span className="font-semibold">Millennium Hotel, Ramallah</span>
                 </div>
               </div>
 
@@ -132,7 +164,7 @@ const Home = ({ onNavigate }: HomeProps) => {
             </div>
 
             {/* Right Side - Image */}
-            <div className="relative">
+            <div className="relative space-y-6">
               <div className="rounded-xl overflow-hidden relative shadow-2xl transform hover:scale-[1.02] transition-transform duration-300" style={{ zIndex: 10 }}>
                 <img
                   src="/image.jpeg"
@@ -143,6 +175,47 @@ const Home = ({ onNavigate }: HomeProps) => {
                 {/* Decorative corner elements */}
                 <div className="absolute top-0 left-0 w-20 h-20 border-t-4 border-l-4 rounded-tl-xl" style={{ borderColor: '#1e3a8a', opacity: 0.3 }}></div>
                 <div className="absolute bottom-0 right-0 w-20 h-20 border-b-4 border-r-4 rounded-br-xl" style={{ borderColor: '#1e3a8a', opacity: 0.3 }}></div>
+              </div>
+
+              {/* Countdown Timer */}
+              <div className="bg-gradient-to-br from-blue-50 to-white rounded-xl p-6 shadow-lg border-2" style={{ borderColor: '#1e3a8a' }}>
+                <h3 className="text-xl font-bold text-center mb-4" style={{ color: '#1e3a8a' }}>
+                  Conference Starts In
+                </h3>
+                <div className="grid grid-cols-4 gap-3">
+                  <div className="text-center">
+                    <div className="bg-white rounded-lg p-4 shadow-md border-2" style={{ borderColor: '#1e3a8a' }}>
+                      <div className="text-3xl font-bold" style={{ color: '#1e3a8a' }}>
+                        {timeLeft.days}
+                      </div>
+                      <div className="text-xs font-medium text-gray-600 mt-1">Days</div>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="bg-white rounded-lg p-4 shadow-md border-2" style={{ borderColor: '#1e3a8a' }}>
+                      <div className="text-3xl font-bold" style={{ color: '#1e3a8a' }}>
+                        {timeLeft.hours}
+                      </div>
+                      <div className="text-xs font-medium text-gray-600 mt-1">Hours</div>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="bg-white rounded-lg p-4 shadow-md border-2" style={{ borderColor: '#1e3a8a' }}>
+                      <div className="text-3xl font-bold" style={{ color: '#1e3a8a' }}>
+                        {timeLeft.minutes}
+                      </div>
+                      <div className="text-xs font-medium text-gray-600 mt-1">Minutes</div>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="bg-white rounded-lg p-4 shadow-md border-2" style={{ borderColor: '#1e3a8a' }}>
+                      <div className="text-3xl font-bold" style={{ color: '#1e3a8a' }}>
+                        {timeLeft.seconds}
+                      </div>
+                      <div className="text-xs font-medium text-gray-600 mt-1">Seconds</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

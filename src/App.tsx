@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
@@ -6,21 +6,93 @@ import Home from './pages/Home';
 import ConferenceInfo from './pages/ConferenceInfo';
 import Submissions from './pages/Submissions';
 import Registration from './pages/Registration';
+import WorkshopRegistration from './pages/WorkshopRegistration';
+import BoardTeam from './pages/BoardTeam';
 import Contact from './pages/Contact';
 
 function App() {
-  const [activeTab, setActiveTab] = useState('home');
+  // Initialize from URL hash or localStorage, default to 'home'
+  const getInitialTab = () => {
+    // Check URL hash first
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      return hash;
+    }
+    // Then check localStorage
+    const saved = localStorage.getItem('activeTab');
+    if (saved) {
+      return saved;
+    }
+    return 'home';
+  };
+
+  const [activeTab, setActiveTab] = useState(getInitialTab);
+
+  // Initialize history on mount
+  useEffect(() => {
+    // Set initial hash if not present
+    if (!window.location.hash) {
+      window.history.replaceState({ tab: activeTab }, '', `#${activeTab}`);
+    }
+  }, []);
+
+  // Update localStorage and browser history when tab changes
+  useEffect(() => {
+    localStorage.setItem('activeTab', activeTab);
+    // Use pushState to add to browser history (creates new history entry)
+    const currentHash = window.location.hash.slice(1);
+    if (currentHash !== activeTab) {
+      window.history.pushState({ tab: activeTab }, '', `#${activeTab}`);
+    }
+  }, [activeTab]);
+
+  // Listen for browser back/forward navigation
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      const hash = window.location.hash.slice(1);
+      if (hash && hash !== activeTab) {
+        setActiveTab(hash);
+      } else if (!hash && activeTab !== 'home') {
+        setActiveTab('home');
+      }
+    };
+
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1);
+      if (hash && hash !== activeTab) {
+        setActiveTab(hash);
+      } else if (!hash && activeTab !== 'home') {
+        setActiveTab('home');
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('hashchange', handleHashChange);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, [activeTab]);
 
   const renderPage = () => {
     switch (activeTab) {
       case 'home':
         return <Home onNavigate={setActiveTab} />;
       case 'conference':
-        return <ConferenceInfo />;
+      case 'conference-about':
+        return <ConferenceInfo section="about" />;
+      case 'conference-team':
+        return <ConferenceInfo section="team" />;
+      case 'conference-hall':
+        return <ConferenceInfo section="hall" />;
       case 'submissions':
         return <Submissions />;
       case 'registration':
         return <Registration />;
+      case 'workshop':
+        return <WorkshopRegistration />;
+      case 'board':
+        return <BoardTeam />;
       case 'contact':
         return <Contact />;
       default:

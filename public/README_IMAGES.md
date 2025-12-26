@@ -7,3 +7,5 @@ The image will be used in the Home page hero section.
 File name should be: `image.jpeg`
 
 
+
+
