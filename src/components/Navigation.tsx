@@ -17,13 +17,12 @@ const Navigation = ({ activeTab, setActiveTab }: NavigationProps) => {
     { id: 'submissions', label: 'Abstract Submission' },
     { id: 'registration', label: 'Registration' },
     { id: 'workshop', label: 'Workshop Registration' },
-    { id: 'board', label: 'The Board Team' },
     { id: 'contact', label: 'Contact Us' },
   ];
 
   const conferenceSubItems = [
     { id: 'conference-about', label: 'About the Conference' },
-    { id: 'conference-team', label: 'Organizing Team' },
+    // { id: 'conference-team', label: 'Organizing Team' }, // Hidden for now
     { id: 'conference-hall', label: 'Conference Hall' },
   ];
 

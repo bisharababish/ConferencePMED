@@ -7,7 +7,6 @@ import ConferenceInfo from './pages/ConferenceInfo';
 import Submissions from './pages/Submissions';
 import Registration from './pages/Registration';
 import WorkshopRegistration from './pages/WorkshopRegistration';
-import BoardTeam from './pages/BoardTeam';
 import Contact from './pages/Contact';
 
 function App() {
@@ -91,8 +90,6 @@ function App() {
         return <Registration />;
       case 'workshop':
         return <WorkshopRegistration />;
-      case 'board':
-        return <BoardTeam />;
       case 'contact':
         return <Contact />;
       default:
