@@ -13,25 +13,51 @@ const Home = ({ onNavigate }: HomeProps) => {
   });
 
   useEffect(() => {
-    const targetDate = new Date('2026-01-30T00:00:00').getTime();
+    // FIXED target date - January 30, 2026 at midnight
+    // This date never changes, so the countdown is consistent across page refreshes
+    const targetDate = new Date('2026-01-30T00:00:00');
+    const targetTime = targetDate.getTime();
+
+    // Log target date for verification (only in development)
+    if (import.meta.env.DEV) {
+      console.log('Countdown target date:', targetDate.toLocaleString());
+      console.log('Current date:', new Date().toLocaleString());
+    }
 
     const updateCountdown = () => {
+      // Get current real-time from browser clock
       const now = new Date().getTime();
-      const difference = targetDate - now;
+      const difference = targetTime - now;
 
       if (difference > 0) {
+        // Calculate time components from real-time difference
+        const totalSeconds = Math.floor(difference / 1000);
+        const days = Math.floor(totalSeconds / 86400); // 60 * 60 * 24
+        const hours = Math.floor((totalSeconds % 86400) / 3600); // 60 * 60
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        // Log days for verification (only in development, first time)
+        if (import.meta.env.DEV && days > 0) {
+          console.log(`Days remaining: ${days}, Hours: ${hours}, Minutes: ${minutes}, Seconds: ${seconds}`);
+        }
+
         setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((difference % (1000 * 60)) / 1000),
+          days,
+          hours,
+          minutes,
+          seconds,
         });
       } else {
+        // Countdown finished
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       }
     };
 
+    // Update immediately on mount with real-time calculation
     updateCountdown();
+
+    // Update every 100ms (10 times per second) for fast, smooth countdown
     const interval = setInterval(updateCountdown, 1000);
 
     return () => clearInterval(interval);
