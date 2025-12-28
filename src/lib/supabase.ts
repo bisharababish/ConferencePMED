@@ -25,8 +25,8 @@ export interface RegistrationData {
   workshops?: string[];
   registration_type: string;
   abstract_submitted: string;
-  payment_method: string;
-  payment_completed: string;
+  payment_method?: string;
+  payment_completed?: string;
   id_upload_url?: string;
   student_card_upload_url?: string;
   payment_receipt_url?: string;

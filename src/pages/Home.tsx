@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 interface HomeProps {
   onNavigate?: (tab: string) => void;
@@ -36,6 +36,24 @@ const Home = ({ onNavigate }: HomeProps) => {
 
     return () => clearInterval(interval);
   }, []);
+
+  // Generate fixed line positions that don't change on re-render
+  const fixedLines = useMemo(() => {
+    // Use a seeded random function for consistent positions
+    let seed = 12345;
+    const seededRandom = () => {
+      seed = (seed * 9301 + 49297) % 233280;
+      return seed / 233280;
+    };
+
+    return Array.from({ length: 30 }, (_, i) => ({
+      x1: `${seededRandom() * 100}%`,
+      y1: `${seededRandom() * 100}%`,
+      x2: `${seededRandom() * 100}%`,
+      y2: `${seededRandom() * 100}%`,
+    }));
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -60,21 +78,17 @@ const Home = ({ onNavigate }: HomeProps) => {
                 }}
               />
             ))}
-            {/* Connecting lines animation */}
+            {/* Connecting lines - static with fixed positions */}
             <svg className="absolute inset-0 w-full h-full" style={{ opacity: 0.15 }}>
-              {[...Array(30)].map((_, i) => (
+              {fixedLines.map((line, i) => (
                 <line
                   key={i}
-                  x1={`${Math.random() * 100}%`}
-                  y1={`${Math.random() * 100}%`}
-                  x2={`${Math.random() * 100}%`}
-                  y2={`${Math.random() * 100}%`}
+                  x1={line.x1}
+                  y1={line.y1}
+                  x2={line.x2}
+                  y2={line.y2}
                   stroke="#DC2626"
                   strokeWidth="1"
-                  className="animate-pulse"
-                  style={{
-                    animationDelay: `${Math.random() * 2}s`,
-                  }}
                 />
               ))}
             </svg>
