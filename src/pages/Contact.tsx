@@ -3,6 +3,7 @@ import { Loader2, Mail, Phone, MapPin, Instagram, Send, MessageSquare } from 'lu
 import toast from 'react-hot-toast';
 import { supabase, ContactData } from '../lib/supabase';
 import { generateId } from '../lib/utils';
+import { sanitizeInput, isValidEmail, checkRateLimit } from '../lib/security';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -17,17 +18,42 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Rate limiting check
+    const userIdentifier = formData.email || 'anonymous';
+    if (!checkRateLimit(userIdentifier, 3, 60000)) {
+      toast.error('Too many requests. Please wait a minute before submitting again.');
+      return;
+    }
+
+    // Validate email
+    if (!isValidEmail(formData.email)) {
+      toast.error('Please enter a valid email address.');
+      return;
+    }
+
+    // Validate message length
+    if (!formData.query || formData.query.trim().length === 0) {
+      toast.error('Please enter a message.');
+      return;
+    }
+
+    if (formData.query.length > 5000) {
+      toast.error('Message must be 5000 characters or less.');
+      return;
+    }
+
     setLoading(true);
 
     try {
       const contactData: ContactData = {
         id: generateId(),
-        first_name: formData.firstName,
-        last_name: formData.lastName,
-        email: formData.email,
-        phone: formData.phone || undefined,
-        subject: formData.subject || undefined,
-        message: formData.query,
+        first_name: sanitizeInput(formData.firstName, 100),
+        last_name: sanitizeInput(formData.lastName, 100),
+        email: formData.email.trim().toLowerCase().substring(0, 255),
+        phone: formData.phone ? sanitizeInput(formData.phone, 20) : undefined,
+        subject: formData.subject ? sanitizeInput(formData.subject, 200) : undefined,
+        message: sanitizeInput(formData.query, 5000),
       };
 
       toast.loading('Sending message...', { id: 'contact' });

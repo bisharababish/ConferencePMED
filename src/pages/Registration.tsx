@@ -7,6 +7,7 @@ import { supabase, RegistrationData } from '../lib/supabase';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://nzjjemfrfgpnmjpxrmsx.supabase.co';
 import { uploadFile } from '../lib/storage';
 import { generateId } from '../lib/utils';
+import { validateRegistrationData, sanitizeInput, checkRateLimit } from '../lib/security';
 
 const Registration = () => {
   const [formData, setFormData] = useState({
@@ -30,12 +31,38 @@ const Registration = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Rate limiting check (client-side)
+    const userIdentifier = formData.email || 'anonymous';
+    if (!checkRateLimit(userIdentifier, 3, 60000)) {
+      toast.error('Too many requests. Please wait a minute before submitting again.');
+      return;
+    }
+
     // Validate gender before submission - only accept exactly "male", "Male", "female", or "Female"
     const trimmedGender = formData.gender.trim();
     const validGenders = ['male', 'Male', 'female', 'Female'];
     if (!validGenders.includes(trimmedGender)) {
       setGenderError('Please enter exactly "Male" or "Female" (or "male" or "female")');
       toast.error('Please enter a valid gender: Male, male, Female, or female');
+      return;
+    }
+
+    // Validate all registration data
+    const validation = validateRegistrationData({
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phone: formData.phone,
+      city: formData.city,
+      jobTitle: formData.jobTitle,
+      specialty: formData.specialty,
+      institution: formData.institution,
+      registrationType: formData.registrationType,
+      abstractSubmitted: formData.abstractSubmitted,
+    });
+
+    if (!validation.isValid) {
+      toast.error(validation.errors[0] || 'Please check your input and try again.');
       return;
     }
 
@@ -71,22 +98,22 @@ const Registration = () => {
         toast.dismiss('student-upload');
       }
 
-      // Prepare registration data
+      // Prepare registration data with sanitization
       // Normalize gender to proper case
       const normalizedGender = formData.gender.trim().toLowerCase();
       const genderValue = normalizedGender === 'male' ? 'Male' : 'Female';
 
       const registrationData: RegistrationData = {
         id: generateId(),
-        first_name: formData.firstName,
-        last_name: formData.lastName,
+        first_name: sanitizeInput(formData.firstName, 100),
+        last_name: sanitizeInput(formData.lastName, 100),
         gender: genderValue,
-        email: formData.email,
-        phone: formData.phone || undefined,
-        city: formData.city || undefined,
-        job_title: formData.jobTitle || undefined,
-        specialty: formData.specialty || undefined,
-        institution: formData.institution || undefined,
+        email: formData.email.trim().toLowerCase().substring(0, 255),
+        phone: formData.phone ? sanitizeInput(formData.phone, 20) : undefined,
+        city: formData.city ? sanitizeInput(formData.city, 100) : undefined,
+        job_title: formData.jobTitle ? sanitizeInput(formData.jobTitle, 100) : undefined,
+        specialty: formData.specialty ? sanitizeInput(formData.specialty, 100) : undefined,
+        institution: formData.institution ? sanitizeInput(formData.institution, 200) : undefined,
         registration_type: formData.registrationType,
         abstract_submitted: formData.abstractSubmitted,
         id_upload_url: idUploadUrl || undefined,
