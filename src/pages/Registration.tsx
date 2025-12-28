@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { Mail, User, Phone, Upload, Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { supabase, RegistrationData } from '../lib/supabase';
+
+// Get Supabase URL for debugging
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://nzjjemfrfgpnmjpxrmsx.supabase.co';
 import { uploadFile } from '../lib/storage';
 import { generateId } from '../lib/utils';
 
@@ -18,7 +21,6 @@ const Registration = () => {
     specialty: '',
     institution: '',
     studentCardUpload: null as File | null,
-    workshops: [] as string[],
     registrationType: '',
     abstractSubmitted: '',
   });
@@ -85,7 +87,6 @@ const Registration = () => {
         job_title: formData.jobTitle || undefined,
         specialty: formData.specialty || undefined,
         institution: formData.institution || undefined,
-        workshops: formData.workshops.length > 0 ? formData.workshops : undefined,
         registration_type: formData.registrationType,
         abstract_submitted: formData.abstractSubmitted,
         id_upload_url: idUploadUrl || undefined,
@@ -94,12 +95,66 @@ const Registration = () => {
 
       // Insert into database
       toast.loading('Submitting registration...', { id: 'register' });
-      const { error: dbError } = await supabase
-        .from('registrations')
-        .insert([registrationData]);
+      
+      // Log for debugging (only in development)
+      if (import.meta.env.DEV) {
+        console.log('Submitting registration data:', registrationData);
+        console.log('Supabase URL:', supabaseUrl);
+        console.log('Environment check:', {
+          hasUrl: !!import.meta.env.VITE_SUPABASE_URL,
+          hasKey: !!import.meta.env.VITE_SUPABASE_ANON_KEY
+        });
+      }
+      
+      try {
+        const { data, error: dbError } = await supabase
+          .from('registrations')
+          .insert([registrationData])
+          .select();
 
-      if (dbError) {
-        throw dbError;
+        if (dbError) {
+          console.error('❌ Database error:', dbError);
+          console.error('Error details:', {
+            message: dbError.message,
+            details: dbError.details,
+            hint: dbError.hint,
+            code: dbError.code
+          });
+          
+          // Provide more user-friendly error messages
+          let errorMessage = 'Failed to submit registration. ';
+          if (dbError.code === '23505') {
+            errorMessage += 'This email may already be registered.';
+          } else if (dbError.code === 'PGRST116') {
+            errorMessage += 'Database connection issue. Please try again.';
+          } else if (dbError.code === '42501') {
+            errorMessage += 'Permission denied. Please contact support.';
+          } else if (dbError.code === '42P01') {
+            errorMessage += 'Database table not found. Please contact support.';
+          } else if (dbError.message) {
+            errorMessage += dbError.message;
+          } else {
+            errorMessage += 'Please check your connection and try again.';
+          }
+          
+          throw new Error(errorMessage);
+        }
+
+        if (import.meta.env.DEV) {
+          console.log('✅ Registration successful:', data);
+        }
+      } catch (networkError: any) {
+        console.error('❌ Network/Database error:', networkError);
+        
+        // Check if it's a network error
+        if (networkError.name === 'TypeError' && networkError.message.includes('fetch')) {
+          throw new Error('Network error. Please check your internet connection and try again.');
+        }
+        
+        if (networkError.message && !networkError.message.includes('Failed to submit')) {
+          throw new Error('Network error. Please check your internet connection and try again.');
+        }
+        throw networkError;
       }
 
       toast.dismiss('register');
@@ -118,7 +173,6 @@ const Registration = () => {
         specialty: '',
         institution: '',
         studentCardUpload: null,
-        workshops: [],
         registrationType: '',
         abstractSubmitted: '',
       });
@@ -162,20 +216,6 @@ const Registration = () => {
     });
   };
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, checked } = e.target;
-    if (checked) {
-      setFormData({
-        ...formData,
-        workshops: [...formData.workshops, value],
-      });
-    } else {
-      setFormData({
-        ...formData,
-        workshops: formData.workshops.filter(w => w !== value),
-      });
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
@@ -489,26 +529,6 @@ const Registration = () => {
                     </label>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Workshops */}
-            <div className="border-b border-gray-200 pb-6">
-              <h3 className="text-xl font-bold mb-4" style={{ color: '#1e3a8a' }}>Workshops</h3>
-              <p className="text-sm text-gray-600 mb-4">Select the workshops you would like to attend:</p>
-              <div className="space-y-2">
-                {['Point-of-Care Ultrasound (POCUS)', 'Basic Life Support (BLS)', 'Airway Management', 'ECG & Imaging Interpretation', 'Suturing and Basic Surgical Skills', 'Research Methodology', 'Simulation-based Clinical Training'].map((workshop) => (
-                  <label key={workshop} className="flex items-center">
-                    <input
-                      type="checkbox"
-                      value={workshop}
-                      checked={formData.workshops.includes(workshop)}
-                      onChange={handleCheckboxChange}
-                      className="mr-2"
-                    />
-                    <span className="text-gray-700">{workshop}</span>
-                  </label>
-                ))}
               </div>
             </div>
 

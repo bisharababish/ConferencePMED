@@ -4,11 +4,30 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://nzjjemfrfgpnmjpxrmsx.supabase.co';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56amplbWZyZmdwbm1qcHhybXN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYyOTU0OTIsImV4cCI6MjA4MTg3MTQ5Mn0.CLWj9UPu_OzjjQGKs1OzKZa_lzMsYPuBJPvCJXmyrNg';
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn('Supabase URL and Anon Key must be set in environment variables');
+// Log environment variable status (only in development or if explicitly needed)
+if (import.meta.env.DEV) {
+  console.log('Supabase Configuration:', {
+    url: supabaseUrl ? `${supabaseUrl.substring(0, 20)}...` : 'MISSING',
+    hasKey: !!supabaseAnonKey,
+    envUrl: !!import.meta.env.VITE_SUPABASE_URL,
+    envKey: !!import.meta.env.VITE_SUPABASE_ANON_KEY,
+  });
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.error('⚠️ Supabase URL and Anon Key must be set in environment variables');
+  console.error('Current values:', {
+    url: supabaseUrl || 'MISSING',
+    key: supabaseAnonKey ? 'SET' : 'MISSING',
+  });
+}
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    persistSession: false,
+    autoRefreshToken: false,
+  },
+});
 
 // Database types
 export interface RegistrationData {
@@ -22,7 +41,6 @@ export interface RegistrationData {
   job_title?: string;
   specialty?: string;
   institution?: string;
-  workshops?: string[];
   registration_type: string;
   abstract_submitted: string;
   payment_method?: string;

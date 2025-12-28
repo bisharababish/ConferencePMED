@@ -109,7 +109,7 @@ const ConferenceInfo = ({ section = 'about' }: ConferenceInfoProps) => {
               </div>
               <div className="space-y-6">
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  The First Jerusalem Medical and Research Conference is a multidisciplinary medical and scientific conference organized by the Medical Association – Jerusalem Center, with the support of the Palestine Medical Club (PMED Club).
+                  The First Jerusalem Medical and Research Conference is a multidisciplinary medical and scientific conference organized by the Medical Association – Jerusalem Division, with the support of the Palestine Medical Club (PMED Club).
                 </p>
                 <p className="text-lg text-gray-700 leading-relaxed">
                   This conference marks the launch of a national platform dedicated to continuous medical education, scientific exchange, leadership development, and healthcare innovation in Palestine.

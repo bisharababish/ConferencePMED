@@ -10,6 +10,7 @@ const Navigation = ({ activeTab, setActiveTab }: NavigationProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [conferenceDropdownOpen, setConferenceDropdownOpen] = useState(false);
   const [dropdownTimeout, setDropdownTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [mobileConferenceOpen, setMobileConferenceOpen] = useState(false);
 
   const navItems = [
     { id: 'home', label: 'Home' },
@@ -29,6 +30,7 @@ const Navigation = ({ activeTab, setActiveTab }: NavigationProps) => {
   const handleTabClick = (tabId: string) => {
     setActiveTab(tabId);
     setMobileMenuOpen(false);
+    setMobileConferenceOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
     // Update URL using pushState (creates new history entry for back button)
     window.history.pushState({ tab: tabId }, '', `#${tabId}`);
@@ -193,8 +195,9 @@ const Navigation = ({ activeTab, setActiveTab }: NavigationProps) => {
         <div
           className={`lg:hidden bg-white border-t border-gray-200 overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen
             ? 'max-h-[600px] opacity-100'
-            : 'max-h-0 opacity-0'
+            : 'max-h-0 opacity-0 pointer-events-none'
             }`}
+          style={{ display: mobileMenuOpen ? 'block' : 'none' }}
         >
           <div className={`px-2 pt-2 pb-3 space-y-1 transform transition-all duration-300 ${mobileMenuOpen
             ? 'translate-y-0 opacity-100'
@@ -202,34 +205,56 @@ const Navigation = ({ activeTab, setActiveTab }: NavigationProps) => {
             }`}>
             {navItems.map((item) => (
               <div key={item.id}>
-                <button
-                  onClick={() => handleTabClick(item.id)}
-                  className={`block w-full text-left px-3 py-3 rounded-md text-base font-medium transition-all duration-300 active:scale-95 active:bg-gray-200 ${activeTab === item.id || activeTab.startsWith('conference-')
-                    ? 'bg-blue-50'
-                    : 'text-black hover:bg-gray-50'
-                    }`}
-                  style={activeTab === item.id || activeTab.startsWith('conference-') ? { color: '#1e3a8a' } : {}}
-                >
-                  {item.label}
-                </button>
-                {item.hasDropdown && (
-                  <div className="pl-6 space-y-1">
-                    {conferenceSubItems.map((subItem) => (
-                      <button
-                        key={subItem.id}
-                        onClick={() => {
-                          handleTabClick(subItem.id);
-                          setMobileMenuOpen(false);
-                        }}
-                        className={`block w-full text-left px-3 py-2 rounded-md text-sm transition-all duration-300 active:scale-95 active:bg-gray-200 hover:translate-x-1 ${activeTab === subItem.id
-                          ? 'bg-blue-100 text-blue-700 font-medium'
-                          : 'text-gray-600 hover:bg-gray-50'
-                          }`}
+                {item.hasDropdown ? (
+                  <>
+                    <button
+                      onClick={() => setMobileConferenceOpen(!mobileConferenceOpen)}
+                      className={`w-full text-left px-3 py-3 rounded-md text-base font-medium transition-all duration-300 active:scale-95 active:bg-gray-200 flex items-center justify-between ${activeTab === item.id || activeTab.startsWith('conference-')
+                        ? 'bg-blue-50'
+                        : 'text-black hover:bg-gray-50'
+                        }`}
+                      style={activeTab === item.id || activeTab.startsWith('conference-') ? { color: '#1e3a8a' } : {}}
+                    >
+                      <span>{item.label}</span>
+                      <svg
+                        className={`w-5 h-5 transition-transform duration-300 ${mobileConferenceOpen ? 'rotate-180' : ''}`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
                       >
-                        {subItem.label}
-                      </button>
-                    ))}
-                  </div>
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                    {mobileConferenceOpen && (
+                      <div className="pl-6 space-y-1">
+                        {conferenceSubItems.map((subItem) => (
+                          <button
+                            key={subItem.id}
+                            onClick={() => {
+                              handleTabClick(subItem.id);
+                            }}
+                            className={`block w-full text-left px-3 py-2 rounded-md text-sm transition-all duration-300 active:scale-95 active:bg-gray-200 hover:translate-x-1 ${activeTab === subItem.id
+                              ? 'bg-blue-100 text-blue-700 font-medium'
+                              : 'text-gray-600 hover:bg-gray-50'
+                              }`}
+                          >
+                            {subItem.label}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <button
+                    onClick={() => handleTabClick(item.id)}
+                    className={`block w-full text-left px-3 py-3 rounded-md text-base font-medium transition-all duration-300 active:scale-95 active:bg-gray-200 ${activeTab === item.id
+                      ? 'bg-blue-50'
+                      : 'text-black hover:bg-gray-50'
+                      }`}
+                    style={activeTab === item.id ? { color: '#1e3a8a' } : {}}
+                  >
+                    {item.label}
+                  </button>
                 )}
               </div>
             ))}

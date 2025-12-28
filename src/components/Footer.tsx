@@ -67,7 +67,7 @@ const Footer = () => {
               <h3 className="text-xl font-bold mb-4 text-gray-900">Organized By</h3>
               <div className="space-y-3">
                 <div>
-                  <h4 className="text-lg font-semibold mb-1 text-gray-800">Medical Association – Jerusalem Center</h4>
+                  <h4 className="text-lg font-semibold mb-1 text-gray-800">Medical Association – Jerusalem Division</h4>
                   <p className="text-sm text-gray-600">With the support of</p>
                   <p className="text-lg font-semibold text-gray-800">Palestine Medical Club (PMED Club)</p>
                 </div>

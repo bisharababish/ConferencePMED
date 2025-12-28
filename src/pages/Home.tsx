@@ -252,12 +252,13 @@ const Home = ({ onNavigate }: HomeProps) => {
               ].map((logo) => (
                 <div
                   key={logo.id}
-                  className="bg-white rounded-lg p-4 min-w-[180px] h-[150px] flex flex-col items-center justify-center shadow-sm border border-gray-200 hover:shadow-md transition-shadow flex-shrink-0"
+                  className="bg-white rounded-lg p-4 min-w-[180px] sm:min-w-[200px] h-[120px] sm:h-[150px] flex flex-col items-center justify-center shadow-sm border border-gray-200 hover:shadow-md transition-shadow flex-shrink-0"
                 >
                   <img
                     src={logo.image}
                     alt={logo.nameEn}
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-contain max-w-full max-h-full"
+                    style={{ display: 'block' }}
                   />
                 </div>
               ))}
@@ -270,12 +271,13 @@ const Home = ({ onNavigate }: HomeProps) => {
               ].map((logo) => (
                 <div
                   key={logo.id}
-                  className="bg-white rounded-lg p-4 min-w-[180px] h-[150px] flex flex-col items-center justify-center shadow-sm border border-gray-200 hover:shadow-md transition-shadow flex-shrink-0"
+                  className="bg-white rounded-lg p-4 min-w-[180px] sm:min-w-[200px] h-[120px] sm:h-[150px] flex flex-col items-center justify-center shadow-sm border border-gray-200 hover:shadow-md transition-shadow flex-shrink-0"
                 >
                   <img
                     src={logo.image}
                     alt={logo.nameEn}
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-contain max-w-full max-h-full"
+                    style={{ display: 'block' }}
                   />
                 </div>
               ))}
@@ -298,7 +300,7 @@ const Home = ({ onNavigate }: HomeProps) => {
           <div className="bg-white rounded-2xl p-8 md:p-12 shadow-xl max-w-5xl mx-auto mb-12">
             <h3 className="text-2xl font-bold mb-6 text-center" style={{ color: '#1e3a8a' }}>About the Conference</h3>
             <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-6 text-center">
-              The First Jerusalem Medical and Research Conference is a multidisciplinary medical and scientific conference organized by the <strong style={{ color: '#1e3a8a' }}>Medical Association – Jerusalem Center</strong>, with the support of the <strong style={{ color: '#1e3a8a' }}>Palestine Medical Club (PMED Club)</strong>.
+              The First Jerusalem Medical and Research Conference is a multidisciplinary medical and scientific conference organized by the <strong style={{ color: '#1e3a8a' }}>Medical Association – Jerusalem Division</strong>, with the support of the <strong style={{ color: '#1e3a8a' }}>Palestine Medical Club (PMED Club)</strong>.
             </p>
             <p className="text-base md:text-lg text-gray-700 leading-relaxed text-center">
               This conference marks the launch of a national platform dedicated to continuous medical education, scientific exchange, leadership development, and healthcare innovation in Palestine. It brings together medical students, residents, specialists, consultants, researchers, and allied health professionals for a full day of high-level scientific and professional engagement.
@@ -439,7 +441,7 @@ const Home = ({ onNavigate }: HomeProps) => {
             <h3 className="text-2xl font-bold mb-6" style={{ color: '#1e3a8a' }}>Organized By</h3>
             <div className="space-y-4">
               <div>
-                <h4 className="text-xl font-bold mb-2 text-gray-900">Medical Association – Jerusalem Center</h4>
+                <h4 className="text-xl font-bold mb-2 text-gray-900">Medical Association – Jerusalem Division</h4>
                 <p className="text-gray-600 mb-4">With the support of Palestine Medical Club (PMED Club)</p>
               </div>
             </div>
