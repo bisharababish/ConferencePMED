@@ -106,3 +106,4 @@ GRANT ALL ON public.registrations TO anon, authenticated;
 -- 5. All optional fields allow NULL values
 -- ============================================
 
+
