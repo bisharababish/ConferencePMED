@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS public.registrations (
     CONSTRAINT email_format CHECK (email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'),
     CONSTRAINT gender_check CHECK (gender IN ('Male', 'Female')),
     CONSTRAINT registration_type_check CHECK (registration_type IN ('General Delegate', 'Workshop Delegate', 'Research Presenter', 'Observer')),
-    CONSTRAINT abstract_submitted_check CHECK (abstract_submitted IN ('Yes', 'No'))
+    CONSTRAINT abstract_submitted_check CHECK (abstract_submitted IN ('Yes', 'No', 'Other'))
 );
 
 -- ============================================

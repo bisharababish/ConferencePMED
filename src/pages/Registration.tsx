@@ -519,9 +519,7 @@ const Registration = () => {
                   >
                     <option value="">Select registration type</option>
                     <option value="General Delegate">General Delegate</option>
-                    <option value="Workshop Delegate">Workshop Delegate</option>
                     <option value="Research Presenter">Research Presenter</option>
-                    <option value="Observer">Observer</option>
                   </select>
                 </div>
 
@@ -553,6 +551,18 @@ const Registration = () => {
                         className="mr-2"
                       />
                       No
+                    </label>
+                    <label className="flex items-center">
+                      <input
+                        type="radio"
+                        name="abstractSubmitted"
+                        value="Other"
+                        checked={formData.abstractSubmitted === 'Other'}
+                        onChange={handleChange}
+                        required
+                        className="mr-2"
+                      />
+                      Other
                     </label>
                   </div>
                 </div>
