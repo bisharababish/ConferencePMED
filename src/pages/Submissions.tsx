@@ -35,6 +35,7 @@ const Submissions = () => {
     'Medical Education',
     'Mental Health',
     'Digital Health/AI',
+    'Other',
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {

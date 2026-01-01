@@ -107,3 +107,4 @@ GRANT ALL ON public.registrations TO anon, authenticated;
 -- ============================================
 
 
+

@@ -552,18 +552,6 @@ const Registration = () => {
                       />
                       No
                     </label>
-                    <label className="flex items-center">
-                      <input
-                        type="radio"
-                        name="abstractSubmitted"
-                        value="Other"
-                        checked={formData.abstractSubmitted === 'Other'}
-                        onChange={handleChange}
-                        required
-                        className="mr-2"
-                      />
-                      Other
-                    </label>
                   </div>
                 </div>
               </div>

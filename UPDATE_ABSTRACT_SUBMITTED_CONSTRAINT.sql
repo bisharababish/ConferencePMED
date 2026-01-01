@@ -2,7 +2,7 @@
 -- UPDATE ABSTRACT_SUBMITTED CONSTRAINT
 -- ============================================
 -- This SQL script updates the abstract_submitted constraint
--- to allow 'Yes', 'No', and 'Other' values
+-- to only allow 'Yes' and 'No' values (removes 'Other')
 -- Run this in your Supabase SQL Editor
 -- ============================================
 
@@ -10,10 +10,10 @@
 ALTER TABLE public.registrations 
 DROP CONSTRAINT IF EXISTS abstract_submitted_check;
 
--- Step 2: Add the updated constraint to allow 'Yes', 'No', and 'Other'
+-- Step 2: Add the updated constraint to only allow 'Yes' and 'No'
 ALTER TABLE public.registrations 
 ADD CONSTRAINT abstract_submitted_check 
-CHECK (abstract_submitted IN ('Yes', 'No', 'Other'));
+CHECK (abstract_submitted IN ('Yes', 'No'));
 
 -- ============================================
 -- VERIFICATION
@@ -29,9 +29,11 @@ CHECK (abstract_submitted IN ('Yes', 'No', 'Other'));
 -- ============================================
 -- NOTES:
 -- ============================================
--- 1. This updates the constraint to allow 'Other' as a valid value
+-- 1. This updates the constraint to only allow 'Yes' and 'No' (removes 'Other')
 -- 2. If you're using SECURE_DATABASE_SETUP.sql, you'll need to update
 --    line 35 in that file as well to match this constraint
--- 3. The form now supports Yes, No, and Other options
+-- 3. The "Other" option has been moved to the Topic of Abstract field
+--    in the abstract submission form
 -- ============================================
+
 
