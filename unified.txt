@@ -1,0 +1,25 @@
+Ibtikar
+
+AI-powered mobile app that identifies harmful content in your Twitter/X feed.
+
+
+Ibtikar is a mobile application designed to help users identify and filter potentially harmful content in their Twitter/X social media feeds. The app uses advanced AI technology, specifically a custom fine-tuned Arabic BERT (AraBERT) model, to analyze posts and tweets in real-time.
+Key Features:
+AI-Powered Content Analysis: Automatically scans posts from accounts you follow on Twitter/X and classifies them as "harmful", "safe", or "unknown" using machine learning models
+Real-Time Safety Alerts: Provides immediate notifications about potentially harmful content in your feed
+Privacy-Focused: Uses secure OAuth 2.0 authentication, encrypts sensitive data, and gives you full control over your information
+User-Friendly Interface: Simple, intuitive design that makes it easy to understand content classifications
+Data Transparency: Clear privacy policy and easy account deletion process
+How It Works:
+Connect your Twitter/X account securely via OAuth 2.0
+The app analyzes posts from accounts you follow
+AI models classify content and provide safety ratings
+You receive alerts and insights about potentially harmful content
+Privacy & Security:
+All OAuth tokens are encrypted using Fernet encryption
+Data transmission uses HTTPS/TLS encryption
+You can delete your account and all associated data at any time
+Full compliance with GDPR and CCPA regulations
+Developer: Ibtikar Development
+Contact: support@ibtikar.app
+Ibtikar helps you maintain a safer social media experience by leveraging AI to identify potentially harmful content before you see it.

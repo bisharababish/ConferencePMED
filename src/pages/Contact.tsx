@@ -170,8 +170,10 @@ const Contact = () => {
                 </div>
                 <div className="flex-1">
                   <h3 className="font-bold text-lg text-gray-900 mb-1">Email</h3>
-                  <p className="text-sm text-gray-600 mb-2">info@jmrc-palestine.com</p>
-                  <a href="mailto:info@jmrc-palestine.com" className="text-sm font-medium" style={{ color: '#1e3a8a' }}>
+                  <a href="mailto:support@jmrc.live" className="text-sm text-gray-600 mb-2 hover:text-blue-600 transition-colors block">
+                    support@jmrc.live
+                  </a>
+                  <a href="mailto:support@jmrc.live" className="text-sm font-medium" style={{ color: '#1e3a8a' }}>
                     Send Email →
                   </a>
                 </div>
@@ -217,7 +219,7 @@ const Contact = () => {
                   <h3 className="font-bold text-lg text-gray-900 mb-1">Instagram</h3>
                   <p className="text-sm text-gray-600 mb-2">@jmrc_palestine</p>
                   <a
-                    href="https://www.instagram.com/jmrc_palestine/?utm_source=qr#"
+                    href="https://www.instagram.com/jmrc_palestine/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm font-medium inline-flex items-center gap-1 hover:gap-2 transition-all"
@@ -253,7 +255,7 @@ const Contact = () => {
                       </svg>
                     </a>
                     <a
-                      href="https://www.instagram.com/jmrc_palestine/?utm_source=qr#"
+                      href="https://www.instagram.com/jmrc_palestine/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-3 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-110 border border-gray-200 hover:border-blue-300"

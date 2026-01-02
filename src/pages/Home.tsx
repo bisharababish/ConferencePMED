@@ -485,8 +485,8 @@ const Home = ({ onNavigate }: HomeProps) => {
                 </div>
                 <div>
                   <h4 className="font-bold text-gray-900 mb-1">Email</h4>
-                  <a href="mailto:info@jmrc-palestine.com" className="text-gray-700 hover:text-blue-600 transition-colors">
-                    info@jmrc-palestine.com
+                  <a href="mailto:support@jmrc.live" className="text-gray-700 hover:text-blue-600 transition-colors">
+                    support@jmrc.live
                   </a>
                 </div>
               </div>
@@ -524,7 +524,7 @@ const Home = ({ onNavigate }: HomeProps) => {
                 <div>
                   <h4 className="font-bold text-gray-900 mb-1">Instagram</h4>
                   <a
-                    href="https://www.instagram.com/jmrc_palestine/?utm_source=qr#"
+                    href="https://www.instagram.com/jmrc_palestine/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-700 hover:text-blue-600 transition-colors"
