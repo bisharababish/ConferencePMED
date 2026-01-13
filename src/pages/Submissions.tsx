@@ -16,6 +16,10 @@ const Submissions = () => {
     coauthors: [{ name: '', jobTitle: '' }],
     email: '',
     phone: '',
+    isPublished: '',
+    publicationLink: '',
+    studyDesign: '',
+    originalityDeclaration: false,
   });
   const [loading, setLoading] = useState(false);
 
@@ -35,7 +39,6 @@ const Submissions = () => {
     'Medical Education',
     'Mental Health',
     'Digital Health/AI',
-    'Other',
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -64,6 +67,13 @@ const Submissions = () => {
         .filter(c => c.name.trim() !== '')
         .map(c => ({ name: c.name, job_title: c.jobTitle }));
 
+      // Validate originality declaration
+      if (!formData.originalityDeclaration) {
+        toast.error('Please confirm the Declaration of Originality to proceed.');
+        setLoading(false);
+        return;
+      }
+
       const submissionData: SubmissionData = {
         id: generateId(),
         title: formData.title,
@@ -75,6 +85,10 @@ const Submissions = () => {
         email: formData.email,
         phone: formData.phone || undefined,
         abstract_document_url: abstractDocumentUrl || undefined,
+        is_published: formData.isPublished || undefined,
+        publication_link: formData.isPublished === 'yes' && formData.publicationLink ? formData.publicationLink : undefined,
+        study_design: formData.studyDesign || undefined,
+        originality_declaration: formData.originalityDeclaration,
       };
 
       // Insert into database
@@ -101,6 +115,10 @@ const Submissions = () => {
         coauthors: [{ name: '', jobTitle: '' }],
         email: '',
         phone: '',
+        isPublished: '',
+        publicationLink: '',
+        studyDesign: '',
+        originalityDeclaration: false,
       });
     } catch (err: any) {
       console.error('Submission error:', err);
@@ -114,66 +132,25 @@ const Submissions = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-
+    
     // Validate phone number to only accept numbers, +, spaces, dashes, and parentheses
     if (name === 'phone') {
-      // Filter out invalid characters instead of just showing an error
-      const filteredValue = value.split('').filter(char => /[\d\s\+\-\(\)]/.test(char)).join('');
-      if (filteredValue !== value) {
+      const phoneRegex = /^[\d\s\+\-\(\)]*$/;
+      if (!phoneRegex.test(value)) {
         toast.error('Phone number can only contain numbers and formatting characters (+, -, spaces, parentheses)');
-        // Update with filtered value to prevent invalid characters from being entered
-        setFormData({
-          ...formData,
-          [name]: filteredValue,
-        });
         return;
       }
     }
-
+    
     setFormData({
       ...formData,
       [name]: value,
     });
   };
 
-  const validatePDFFile = async (file: File): Promise<boolean> => {
-    return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const arrayBuffer = e.target?.result as ArrayBuffer;
-        const bytes = new Uint8Array(arrayBuffer);
-
-        // PDF: 25 50 44 46 (%PDF)
-        const isPDF = bytes[0] === 0x25 && bytes[1] === 0x50 && bytes[2] === 0x44 && bytes[3] === 0x46;
-        resolve(isPDF);
-      };
-      reader.onerror = () => resolve(false);
-      reader.readAsArrayBuffer(file.slice(0, 4)); // Read first 4 bytes
-    });
-  };
-
-  const validateWordFile = async (file: File): Promise<boolean> => {
-    return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const arrayBuffer = e.target?.result as ArrayBuffer;
-        const bytes = new Uint8Array(arrayBuffer);
-
-        // DOC: D0 CF 11 E0 (Microsoft Office/OLE2)
-        // DOCX: 50 4B 03 04 (ZIP file signature, since DOCX is a ZIP archive)
-        const isDOC = bytes[0] === 0xD0 && bytes[1] === 0xCF && bytes[2] === 0x11 && bytes[3] === 0xE0;
-        const isDOCX = bytes[0] === 0x50 && bytes[1] === 0x4B && bytes[2] === 0x03 && bytes[3] === 0x04;
-
-        resolve(isDOC || isDOCX);
-      };
-      reader.onerror = () => resolve(false);
-      reader.readAsArrayBuffer(file.slice(0, 4)); // Read first 4 bytes
-    });
-  };
-
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
-
+    
     if (!file) {
       setFormData({
         ...formData,
@@ -187,31 +164,13 @@ const Submissions = () => {
     const fileExtension = fileName.split('.').pop() || '';
     const allowedExtensions = ['pdf', 'doc', 'docx'];
     const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-
-    // Check extension and MIME type
+    
     if (!allowedExtensions.includes(fileExtension) || !allowedTypes.includes(file.type)) {
       toast.error('Invalid file type. Please upload a document file (PDF, DOC, or DOCX).');
       e.target.value = ''; // Clear the input
       return;
     }
-
-    // Validate actual file content (magic bytes) to prevent spoofed files
-    if (fileExtension === 'pdf') {
-      const isValidPDF = await validatePDFFile(file);
-      if (!isValidPDF) {
-        toast.error('Invalid file content. The file does not appear to be a valid PDF. Please upload a real PDF file.');
-        e.target.value = ''; // Clear the input
-        return;
-      }
-    } else if (fileExtension === 'doc' || fileExtension === 'docx') {
-      const isValidWord = await validateWordFile(file);
-      if (!isValidWord) {
-        toast.error('Invalid file content. The file does not appear to be a valid Word document. Please upload a real DOC or DOCX file.');
-        e.target.value = ''; // Clear the input
-        return;
-      }
-    }
-
+    
     setFormData({
       ...formData,
       abstractDocument: file,
@@ -272,7 +231,7 @@ const Submissions = () => {
               <line x1="21" y1="26" x2="21" y2="40" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
             </svg>
             <div className="flex flex-col">
-              <span className="text-2xl font-bold text-white leading-tight">JERUSALEM</span>
+              <span className="text-2xl font-bold text-white leading-tight">ANNUAL JERUSALEM</span>
               <span className="text-sm text-white leading-tight">MEDICAL & RESEARCH CONFERENCE</span>
             </div>
           </div>
@@ -460,7 +419,7 @@ const Submissions = () => {
             </div>
 
             {/* Section 3: Contact Information */}
-            <div>
+            <div className="border-b border-gray-200 pb-8">
               <h2 className="text-2xl font-bold mb-6" style={{ color: '#1e3a8a' }}>Section 3: Contact Information</h2>
 
               <div className="space-y-6">
@@ -491,6 +450,105 @@ const Submissions = () => {
                     className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors text-black"
                     placeholder="+970 5XX XXX XXX"
                   />
+                </div>
+              </div>
+            </div>
+
+            {/* Section 4: Published or Not */}
+            <div className="border-b border-gray-200 pb-8">
+              <h2 className="text-2xl font-bold mb-6" style={{ color: '#1e3a8a' }}>Section 4: Published or Not</h2>
+
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-bold mb-3 text-gray-700">
+                    Has this work been published? <span className="text-red-500">*</span>
+                  </label>
+                  <div className="flex gap-6">
+                    <label className="flex items-center cursor-pointer">
+                      <input
+                        type="radio"
+                        name="isPublished"
+                        value="yes"
+                        checked={formData.isPublished === 'yes'}
+                        onChange={handleChange}
+                        required
+                        className="mr-2 w-4 h-4"
+                      />
+                      <span className="text-gray-700">Yes</span>
+                    </label>
+                    <label className="flex items-center cursor-pointer">
+                      <input
+                        type="radio"
+                        name="isPublished"
+                        value="no"
+                        checked={formData.isPublished === 'no'}
+                        onChange={handleChange}
+                        required
+                        className="mr-2 w-4 h-4"
+                      />
+                      <span className="text-gray-700">No</span>
+                    </label>
+                  </div>
+                </div>
+
+                {formData.isPublished === 'yes' && (
+                  <div>
+                    <label className="block text-sm font-bold mb-2 text-gray-700">
+                      Publication Link <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="url"
+                      name="publicationLink"
+                      value={formData.publicationLink}
+                      onChange={handleChange}
+                      required={formData.isPublished === 'yes'}
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors text-black"
+                      placeholder="https://example.com/publication"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Please provide the URL link to the publication</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Section 5: Study Design */}
+            <div className="border-b border-gray-200 pb-8">
+              <h2 className="text-2xl font-bold mb-6" style={{ color: '#1e3a8a' }}>Section 5: Study Design</h2>
+
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-bold mb-2 text-gray-700">
+                    Study Design
+                  </label>
+                  <textarea
+                    name="studyDesign"
+                    value={formData.studyDesign}
+                    onChange={handleChange}
+                    rows={6}
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors resize-none text-black"
+                    placeholder="Enter the study design details..."
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Section 6: Declaration of Originality */}
+            <div>
+              <h2 className="text-2xl font-bold mb-6" style={{ color: '#1e3a8a' }}>Section 6: Declaration of Originality</h2>
+
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <input
+                    type="checkbox"
+                    name="originalityDeclaration"
+                    checked={formData.originalityDeclaration}
+                    onChange={(e) => setFormData({ ...formData, originalityDeclaration: e.target.checked })}
+                    required
+                    className="mt-1 mr-3 w-5 h-5 cursor-pointer"
+                  />
+                  <label className="text-gray-700 cursor-pointer">
+                    I confirm that this work is original, has not been plagiarized, and has not been presented at another conference. <span className="text-red-500">*</span>
+                  </label>
                 </div>
               </div>
             </div>

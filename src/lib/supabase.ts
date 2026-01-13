@@ -1,35 +1,34 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Supabase configuration
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://nzjjemfrfgpnmjpxrmsx.supabase.co';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56amplbWZyZmdwbm1qcHhybXN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYyOTU0OTIsImV4cCI6MjA4MTg3MTQ5Mn0.CLWj9UPu_OzjjQGKs1OzKZa_lzMsYPuBJPvCJXmyrNg';
+// Initialize Supabase client
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
 
-// Log environment variable status (only in development or if explicitly needed)
-if (import.meta.env.DEV) {
-  console.log('Supabase Configuration:', {
-    url: supabaseUrl ? `${supabaseUrl.substring(0, 20)}...` : 'MISSING',
-    hasKey: !!supabaseAnonKey,
-    envUrl: !!import.meta.env.VITE_SUPABASE_URL,
-    envKey: !!import.meta.env.VITE_SUPABASE_ANON_KEY,
-  });
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+// Type definitions
+export interface Coauthor {
+  name: string;
+  job_title: string;
 }
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('⚠️ Supabase URL and Anon Key must be set in environment variables');
-  console.error('Current values:', {
-    url: supabaseUrl || 'MISSING',
-    key: supabaseAnonKey ? 'SET' : 'MISSING',
-  });
+export interface SubmissionData {
+  id: string;
+  title: string;
+  topics: string[];
+  keywords?: string;
+  author_name: string;
+  author_job_title: string;
+  coauthors?: Coauthor[];
+  email: string;
+  phone?: string;
+  abstract_document_url?: string;
+  is_published?: string;
+  publication_link?: string;
+  study_design?: string;
+  originality_declaration: boolean;
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    persistSession: false,
-    autoRefreshToken: false,
-  },
-});
-
-// Database types
 export interface RegistrationData {
   id: string;
   first_name: string;
@@ -41,38 +40,12 @@ export interface RegistrationData {
   job_title?: string;
   specialty?: string;
   institution?: string;
+  workshops?: string[];
   registration_type: string;
   abstract_submitted: string;
-  payment_method?: string;
-  payment_completed?: string;
+  payment_method: string;
+  payment_completed: string;
   id_upload_url?: string;
   student_card_upload_url?: string;
   payment_receipt_url?: string;
-  created_at?: string;
 }
-
-export interface SubmissionData {
-  id: string;
-  title: string;
-  topics: string[];
-  keywords?: string;
-  author_name: string;
-  author_job_title: string;
-  coauthors?: Array<{ name: string; job_title: string }> | null;
-  email: string;
-  phone?: string;
-  abstract_document_url?: string;
-  created_at?: string;
-}
-
-export interface ContactData {
-  id: string;
-  first_name: string;
-  last_name: string;
-  email: string;
-  phone?: string;
-  subject?: string;
-  message: string;
-  created_at?: string;
-}
-

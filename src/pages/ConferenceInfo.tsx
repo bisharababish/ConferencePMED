@@ -1,5 +1,4 @@
-import { Calendar, MapPin, Clock, Award, Mic, BookOpen, Network, Presentation, UserCircle, ChevronDown, ChevronUp, Users, Building } from 'lucide-react';
-import { useState } from 'react';
+import { Calendar, MapPin, Clock, Award, Mic, BookOpen, Network, Presentation, UserCircle, Users } from 'lucide-react';
 
 interface ConferenceInfoProps {
   section?: 'about' | 'team' | 'hall';

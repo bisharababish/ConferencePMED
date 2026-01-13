@@ -47,7 +47,7 @@ function App() {
 
   // Listen for browser back/forward navigation
   useEffect(() => {
-    const handlePopState = (event: PopStateEvent) => {
+    const handlePopState = () => {
       const hash = window.location.hash.slice(1);
       if (hash && hash !== activeTab) {
         setActiveTab(hash);
