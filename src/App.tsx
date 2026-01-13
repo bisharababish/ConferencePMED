@@ -76,7 +76,7 @@ function App() {
   const renderPage = () => {
     switch (activeTab) {
       case 'home':
-        return <Home onNavigate={setActiveTab} />;
+        return <Home />;
       case 'conference':
       case 'conference-about':
         return <ConferenceInfo section="about" />;
@@ -93,7 +93,7 @@ function App() {
       case 'contact':
         return <Contact />;
       default:
-        return <Home onNavigate={setActiveTab} />;
+        return <Home />;
     }
   };
 
