@@ -18,12 +18,8 @@ const Registration = () => {
     specialty: '',
     institution: '',
     studentCardUpload: null as File | null,
-    workshops: [] as string[],
     registrationType: '',
     abstractSubmitted: '',
-    paymentMethod: '',
-    paymentCompleted: '',
-    paymentReceipt: null as File | null,
   });
   const [loading, setLoading] = useState(false);
   const [genderError, setGenderError] = useState('');
@@ -46,7 +42,6 @@ const Registration = () => {
       // Upload files first
       let idUploadUrl: string | null = null;
       let studentCardUploadUrl: string | null = null;
-      let paymentReceiptUrl: string | null = null;
 
       if (formData.idUpload) {
         toast.loading('Uploading ID document...', { id: 'id-upload' });
@@ -73,17 +68,6 @@ const Registration = () => {
         toast.dismiss('student-upload');
       }
 
-      if (formData.paymentReceipt) {
-        toast.loading('Uploading payment receipt...', { id: 'payment-upload' });
-        paymentReceiptUrl = await uploadFile(
-          formData.paymentReceipt,
-          'documents',
-          'registrations',
-          `payment_receipt_${formData.firstName}_${formData.lastName}`
-        );
-        toast.dismiss('payment-upload');
-      }
-
       // Prepare registration data
       // Normalize gender to proper case
       const normalizedGender = formData.gender.trim().toLowerCase();
@@ -100,14 +84,10 @@ const Registration = () => {
         job_title: formData.jobTitle || undefined,
         specialty: formData.specialty || undefined,
         institution: formData.institution || undefined,
-        workshops: formData.workshops.length > 0 ? formData.workshops : undefined,
         registration_type: formData.registrationType,
         abstract_submitted: formData.abstractSubmitted,
-        payment_method: formData.paymentMethod,
-        payment_completed: formData.paymentCompleted,
         id_upload_url: idUploadUrl || undefined,
         student_card_upload_url: studentCardUploadUrl || undefined,
-        payment_receipt_url: paymentReceiptUrl || undefined,
       };
 
       // Insert into database
@@ -136,18 +116,13 @@ const Registration = () => {
         specialty: '',
         institution: '',
         studentCardUpload: null,
-        workshops: [],
         registrationType: '',
         abstractSubmitted: '',
-        paymentMethod: '',
-        paymentCompleted: '',
-        paymentReceipt: null,
       });
     } catch (err: any) {
       console.error('Registration error:', err);
       toast.dismiss('id-upload');
       toast.dismiss('student-upload');
-      toast.dismiss('payment-upload');
       toast.dismiss('register');
       toast.error(err.message || 'Failed to submit registration. Please try again.');
     } finally {
@@ -184,20 +159,6 @@ const Registration = () => {
     });
   };
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, checked } = e.target;
-    if (checked) {
-      setFormData({
-        ...formData,
-        workshops: [...formData.workshops, value],
-      });
-    } else {
-      setFormData({
-        ...formData,
-        workshops: formData.workshops.filter(w => w !== value),
-      });
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
@@ -474,7 +435,6 @@ const Registration = () => {
                   >
                     <option value="">Select registration type</option>
                     <option value="General Delegate">General Delegate</option>
-                    <option value="Workshop Delegate">Workshop Delegate</option>
                     <option value="Research Presenter">Research Presenter</option>
                     <option value="Observer">Observer</option>
                   </select>
@@ -511,101 +471,6 @@ const Registration = () => {
                     </label>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Workshops */}
-            <div className="border-b border-gray-200 pb-6">
-              <h3 className="text-xl font-bold mb-4" style={{ color: '#1e3a8a' }}>Workshops</h3>
-              <p className="text-sm text-gray-600 mb-4">Select the workshops you would like to attend:</p>
-              <div className="space-y-2">
-                {['Point-of-Care Ultrasound (POCUS)', 'Basic Life Support (BLS)', 'Airway Management', 'ECG & Imaging Interpretation', 'Suturing and Basic Surgical Skills', 'Research Methodology', 'Simulation-based Clinical Training'].map((workshop) => (
-                  <label key={workshop} className="flex items-center">
-                    <input
-                      type="checkbox"
-                      value={workshop}
-                      checked={formData.workshops.includes(workshop)}
-                      onChange={handleCheckboxChange}
-                      className="mr-2"
-                    />
-                    <span className="text-gray-700">{workshop}</span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Payment Information */}
-            <div>
-              <h3 className="text-xl font-bold mb-4" style={{ color: '#1e3a8a' }}>Payment Information</h3>
-              <div className="space-y-6">
-                <div>
-                  <label className="block text-sm font-bold mb-2 text-gray-700">
-                    Payment Method <span className="text-red-500">*</span>
-                  </label>
-                  <select
-                    name="paymentMethod"
-                    value={formData.paymentMethod}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors text-black"
-                  >
-                    <option value="">Select payment method</option>
-                    <option value="Bank Transfer">Bank Transfer</option>
-                    <option value="Credit/Debit Card">Credit/Debit Card</option>
-                    <option value="On-Site Payment">On-Site Payment</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-bold mb-2 text-gray-700">
-                    Payment Completed? <span className="text-red-500">*</span>
-                  </label>
-                  <div className="flex gap-6">
-                    <label className="flex items-center">
-                      <input
-                        type="radio"
-                        name="paymentCompleted"
-                        value="Yes"
-                        checked={formData.paymentCompleted === 'Yes'}
-                        onChange={handleChange}
-                        required
-                        className="mr-2"
-                      />
-                      Yes
-                    </label>
-                    <label className="flex items-center">
-                      <input
-                        type="radio"
-                        name="paymentCompleted"
-                        value="No"
-                        checked={formData.paymentCompleted === 'No'}
-                        onChange={handleChange}
-                        required
-                        className="mr-2"
-                      />
-                      No
-                    </label>
-                  </div>
-                </div>
-
-                {formData.paymentCompleted === 'Yes' && (
-                  <div>
-                    <label className="block text-sm font-bold mb-2 text-gray-700">
-                      <div className="flex items-center mb-2">
-                        <Upload className="mr-2" size={20} style={{ color: '#1e3a8a' }} />
-                        Upload Payment Receipt
-                      </div>
-                    </label>
-                    <input
-                      type="file"
-                      name="paymentReceipt"
-                      onChange={handleFileChange}
-                      accept=".jpg,.jpeg,.png,.gif,.pdf"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors"
-                    />
-                    <p className="text-xs text-gray-500 mt-1">Accepted formats: JPG, JPEG, PNG, GIF, PDF</p>
-                  </div>
-                )}
               </div>
             </div>
 
