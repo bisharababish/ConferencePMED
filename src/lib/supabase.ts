@@ -49,3 +49,35 @@ export interface RegistrationData {
   student_card_upload_url?: string;
   payment_receipt_url?: string;
 }
+
+export interface WorkshopSession {
+  time: string;
+  topic: string;
+  speaker?: string;
+  organizer?: string;
+  description: string;
+}
+
+export interface WorkshopRoom {
+  id: string;
+  name_arabic: string;
+  name_english: string;
+  sessions: WorkshopSession[];
+}
+
+export interface WorkshopRegistrationData {
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone?: string;
+  job_title?: string;
+  institution?: string;
+  room_id: string;
+  room_name_arabic: string;
+  room_name_english: string;
+  selected_session_time?: string;
+  selected_session_topic?: string;
+  selected_session_speaker?: string;
+  selected_session_organizer?: string;
+}
