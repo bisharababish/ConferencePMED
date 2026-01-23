@@ -6,6 +6,8 @@ import { uploadFile } from '../lib/storage';
 import { generateId } from '../lib/utils';
 
 const Submissions = () => {
+  const SUBMISSIONS_CLOSED = true; // Set to true to close submissions
+  
   const [formData, setFormData] = useState({
     title: '',
     topics: [] as string[],
@@ -43,6 +45,13 @@ const Submissions = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Prevent submission if closed
+    if (SUBMISSIONS_CLOSED) {
+      toast.error('Abstract submissions are currently closed.');
+      return;
+    }
+    
     setLoading(true);
 
     try {
@@ -242,6 +251,16 @@ const Submissions = () => {
         <div className="max-w-6xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Abstract Submission Application</h1>
           <p className="text-gray-600">Submit your research abstract for the conference</p>
+          {SUBMISSIONS_CLOSED && (
+            <div className="mt-6 max-w-2xl mx-auto bg-red-50 border-2 border-red-300 rounded-lg p-4">
+              <p className="text-red-700 font-semibold text-lg">
+                ⚠️ Abstract submissions are currently closed.
+              </p>
+              <p className="text-red-600 text-sm mt-2">
+                The submission form is displayed for reference only. Please check back later for updates.
+              </p>
+            </div>
+          )}
         </div>
       </div>
 
@@ -264,7 +283,8 @@ const Submissions = () => {
                     value={formData.title}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors text-black"
+                    disabled={SUBMISSIONS_CLOSED}
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors text-black disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
                     placeholder="Enter the title of your abstract"
                   />
                 </div>
@@ -276,12 +296,13 @@ const Submissions = () => {
                   <p className="text-sm text-gray-600 mb-3">Select one or more topics (multiple selection allowed):</p>
                   <div className="grid md:grid-cols-3 gap-3">
                     {topics.map((topic) => (
-                      <label key={topic} className="flex items-center p-3 border-2 border-gray-200 rounded-lg hover:border-blue-400 cursor-pointer">
+                      <label key={topic} className={`flex items-center p-3 border-2 border-gray-200 rounded-lg hover:border-blue-400 ${SUBMISSIONS_CLOSED ? 'cursor-not-allowed opacity-60' : 'cursor-pointer'}`}>
                         <input
                           type="checkbox"
                           checked={formData.topics.includes(topic)}
                           onChange={() => handleTopicChange(topic)}
-                          className="mr-2"
+                          disabled={SUBMISSIONS_CLOSED}
+                          className="mr-2 disabled:cursor-not-allowed"
                         />
                         <span className="text-gray-700 text-sm">{topic}</span>
                       </label>
@@ -301,7 +322,8 @@ const Submissions = () => {
                     onChange={handleFileChange}
                     accept=".pdf,.doc,.docx"
                     required
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors"
+                    disabled={SUBMISSIONS_CLOSED}
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
                   />
                   <p className="text-xs text-gray-500 mt-1">Accepted formats: PDF, DOC, DOCX</p>
                 </div>
@@ -315,7 +337,8 @@ const Submissions = () => {
                     name="keywords"
                     value={formData.keywords}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors text-black"
+                    disabled={SUBMISSIONS_CLOSED}
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors text-black disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
                     placeholder="Enter keywords separated by commas"
                   />
                 </div>
@@ -338,7 +361,8 @@ const Submissions = () => {
                       value={formData.authorName}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors text-black"
+                      disabled={SUBMISSIONS_CLOSED}
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors text-black disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
                       placeholder="Enter author name"
                     />
                   </div>
@@ -353,7 +377,8 @@ const Submissions = () => {
                       value={formData.authorJobTitle}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors text-black"
+                      disabled={SUBMISSIONS_CLOSED}
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors text-black disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
                       placeholder="Enter job title"
                     />
                   </div>
@@ -367,8 +392,9 @@ const Submissions = () => {
                     <button
                       type="button"
                       onClick={addCoauthor}
-                      className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white"
-                      style={{ backgroundColor: '#1e3a8a' }}
+                      disabled={SUBMISSIONS_CLOSED}
+                      className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-60"
+                      style={{ backgroundColor: SUBMISSIONS_CLOSED ? '#9ca3af' : '#1e3a8a' }}
                     >
                       <Plus size={16} />
                       Add Coauthor
@@ -385,7 +411,8 @@ const Submissions = () => {
                           type="text"
                           value={coauthor.name}
                           onChange={(e) => updateCoauthor(index, 'name', e.target.value)}
-                          className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors text-black"
+                          disabled={SUBMISSIONS_CLOSED}
+                          className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors text-black disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
                           placeholder="Enter coauthor name"
                         />
                       </div>
@@ -398,14 +425,16 @@ const Submissions = () => {
                             type="text"
                             value={coauthor.jobTitle}
                             onChange={(e) => updateCoauthor(index, 'jobTitle', e.target.value)}
-                            className="flex-1 px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors text-black"
+                            disabled={SUBMISSIONS_CLOSED}
+                            className="flex-1 px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors text-black disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
                             placeholder="Enter job title"
                           />
                           {formData.coauthors.length > 1 && (
                             <button
                               type="button"
                               onClick={() => removeCoauthor(index)}
-                              className="px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                              disabled={SUBMISSIONS_CLOSED}
+                              className="px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-60"
                             >
                               <X size={16} />
                             </button>
@@ -433,7 +462,8 @@ const Submissions = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors text-black"
+                    disabled={SUBMISSIONS_CLOSED}
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors text-black disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
                     placeholder="your.email@example.com"
                   />
                 </div>
@@ -447,7 +477,8 @@ const Submissions = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors text-black"
+                    disabled={SUBMISSIONS_CLOSED}
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors text-black disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
                     placeholder="+970 5XX XXX XXX"
                   />
                 </div>
@@ -472,7 +503,8 @@ const Submissions = () => {
                         checked={formData.isPublished === 'yes'}
                         onChange={handleChange}
                         required
-                        className="mr-2 w-4 h-4"
+                        disabled={SUBMISSIONS_CLOSED}
+                        className="mr-2 w-4 h-4 disabled:cursor-not-allowed"
                       />
                       <span className="text-gray-700">Yes</span>
                     </label>
@@ -484,7 +516,8 @@ const Submissions = () => {
                         checked={formData.isPublished === 'no'}
                         onChange={handleChange}
                         required
-                        className="mr-2 w-4 h-4"
+                        disabled={SUBMISSIONS_CLOSED}
+                        className="mr-2 w-4 h-4 disabled:cursor-not-allowed"
                       />
                       <span className="text-gray-700">No</span>
                     </label>
@@ -502,7 +535,8 @@ const Submissions = () => {
                       value={formData.publicationLink}
                       onChange={handleChange}
                       required={formData.isPublished === 'yes'}
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors text-black"
+                      disabled={SUBMISSIONS_CLOSED}
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors text-black disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
                       placeholder="https://example.com/publication"
                     />
                     <p className="text-xs text-gray-500 mt-1">Please provide the URL link to the publication</p>
@@ -525,7 +559,8 @@ const Submissions = () => {
                     value={formData.studyDesign}
                     onChange={handleChange}
                     rows={6}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors resize-none text-black"
+                    disabled={SUBMISSIONS_CLOSED}
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors resize-none text-black disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
                     placeholder="Enter the study design details..."
                   />
                 </div>
@@ -544,7 +579,8 @@ const Submissions = () => {
                     checked={formData.originalityDeclaration}
                     onChange={(e) => setFormData({ ...formData, originalityDeclaration: e.target.checked })}
                     required
-                    className="mt-1 mr-3 w-5 h-5 cursor-pointer"
+                    disabled={SUBMISSIONS_CLOSED}
+                    className="mt-1 mr-3 w-5 h-5 cursor-pointer disabled:cursor-not-allowed"
                   />
                   <label className="text-gray-700 cursor-pointer">
                     I confirm that this work is original, has not been plagiarized, and has not been presented at another conference. <span className="text-red-500">*</span>
@@ -556,17 +592,19 @@ const Submissions = () => {
             <div className="pt-6">
               <button
                 type="submit"
-                disabled={loading}
+                disabled={loading || SUBMISSIONS_CLOSED}
                 className="w-full text-white font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
-                style={{ backgroundColor: '#1e3a8a' }}
-                onMouseEnter={(e) => !loading && (e.currentTarget.style.backgroundColor = '#1e40af')}
-                onMouseLeave={(e) => !loading && (e.currentTarget.style.backgroundColor = '#1e3a8a')}
+                style={{ backgroundColor: SUBMISSIONS_CLOSED ? '#9ca3af' : '#1e3a8a' }}
+                onMouseEnter={(e) => !loading && !SUBMISSIONS_CLOSED && (e.currentTarget.style.backgroundColor = '#1e40af')}
+                onMouseLeave={(e) => !loading && !SUBMISSIONS_CLOSED && (e.currentTarget.style.backgroundColor = '#1e3a8a')}
               >
                 {loading ? (
                   <>
                     <Loader2 className="animate-spin" size={20} />
                     Submitting...
                   </>
+                ) : SUBMISSIONS_CLOSED ? (
+                  'Submissions Closed'
                 ) : (
                   'Submit Abstract'
                 )}
