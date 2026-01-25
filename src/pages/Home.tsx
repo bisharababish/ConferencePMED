@@ -263,13 +263,13 @@ const Home = ({ onNavigate }: HomeProps) => {
       </section>
 
       {/* Trusted By Section */}
-      <section className="py-8 sm:py-16 bg-white overflow-hidden">
+      <section className="py-8 sm:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-xl sm:text-2xl font-bold text-center mb-8 sm:mb-12" style={{ color: '#1e3a8a' }}>Trusted By</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-center mb-6 sm:mb-12" style={{ color: '#1e3a8a' }}>Trusted By</h2>
           
           {/* Mobile: Static Grid Layout */}
-          <div className="block md:hidden">
-            <div className="grid grid-cols-2 gap-4 mb-8">
+          <div className="block md:hidden w-full">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-8 w-full">
               {[
                 { name: 'بنك العربي', nameEn: 'Arab Bank', image: '/arab bank.jpg', id: 1 },
                 { name: 'وزارة الصحة', nameEn: 'Ministry of Health', image: '/ministry of health.jpeg', id: 2 },
@@ -278,13 +278,18 @@ const Home = ({ onNavigate }: HomeProps) => {
               ].map((logo) => (
                 <div
                   key={logo.id}
-                  className="bg-white rounded-lg p-3 h-[100px] flex flex-col items-center justify-center shadow-sm border border-gray-200 hover:shadow-md transition-shadow"
+                  className="bg-white rounded-lg p-3 sm:p-4 h-[140px] sm:h-[160px] w-full flex flex-col items-center justify-center shadow-md border-2 border-gray-200 hover:shadow-lg transition-shadow"
+                  style={{ minHeight: '140px' }}
                 >
                   <img
                     src={logo.image}
                     alt={logo.nameEn}
-                    className="w-full h-full object-contain max-w-full max-h-full"
+                    className="w-auto h-auto max-w-[90%] max-h-[90%] object-contain"
                     style={{ display: 'block' }}
+                    loading="lazy"
+                    onError={() => {
+                      console.error('Image failed to load:', logo.image);
+                    }}
                   />
                 </div>
               ))}
