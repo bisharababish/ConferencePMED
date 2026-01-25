@@ -263,12 +263,12 @@ const Home = ({ onNavigate }: HomeProps) => {
       </section>
 
       {/* Trusted By Section */}
-      <section className="py-16 bg-white overflow-hidden">
+      <section className="py-8 sm:py-16 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-center mb-12" style={{ color: '#1e3a8a' }}>Trusted By</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-center mb-8 sm:mb-12" style={{ color: '#1e3a8a' }}>Trusted By</h2>
           {/* Scrolling logos container */}
-          <div className="relative w-full overflow-hidden mb-12">
-            <div className="flex animate-scroll gap-6 items-center">
+          <div className="relative w-full overflow-hidden mb-8 sm:mb-12" style={{ minHeight: '120px' }}>
+            <div className="flex animate-scroll gap-4 sm:gap-6 items-center" style={{ width: 'max-content' }}>
               {/* First set of logos */}
               {[
                 { name: 'بنك العربي', nameEn: 'Arab Bank', image: '/arab bank.jpg', id: 1 },
@@ -278,7 +278,7 @@ const Home = ({ onNavigate }: HomeProps) => {
               ].map((logo) => (
                 <div
                   key={logo.id}
-                  className="bg-white rounded-lg p-4 min-w-[180px] sm:min-w-[200px] h-[120px] sm:h-[150px] flex flex-col items-center justify-center shadow-sm border border-gray-200 hover:shadow-md transition-shadow flex-shrink-0"
+                  className="bg-white rounded-lg p-3 sm:p-4 min-w-[140px] sm:min-w-[180px] md:min-w-[200px] h-[100px] sm:h-[120px] md:h-[150px] flex flex-col items-center justify-center shadow-sm border border-gray-200 hover:shadow-md transition-shadow flex-shrink-0"
                 >
                   <img
                     src={logo.image}
@@ -297,7 +297,7 @@ const Home = ({ onNavigate }: HomeProps) => {
               ].map((logo) => (
                 <div
                   key={logo.id}
-                  className="bg-white rounded-lg p-4 min-w-[180px] sm:min-w-[200px] h-[120px] sm:h-[150px] flex flex-col items-center justify-center shadow-sm border border-gray-200 hover:shadow-md transition-shadow flex-shrink-0"
+                  className="bg-white rounded-lg p-3 sm:p-4 min-w-[140px] sm:min-w-[180px] md:min-w-[200px] h-[100px] sm:h-[120px] md:h-[150px] flex flex-col items-center justify-center shadow-sm border border-gray-200 hover:shadow-md transition-shadow flex-shrink-0"
                 >
                   <img
                     src={logo.image}

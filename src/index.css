@@ -64,6 +64,15 @@
 
 .animate-scroll {
   animation: scroll 30s linear infinite;
+  width: fit-content;
+  will-change: transform;
+}
+
+/* Ensure scrolling animation works on mobile */
+@media (max-width: 640px) {
+  .animate-scroll {
+    animation-duration: 25s;
+  }
 }
 
 @keyframes border-dash {
