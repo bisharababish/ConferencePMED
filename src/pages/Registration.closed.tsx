@@ -1,3 +1,6 @@
+// BACKUP FILE: Registration with closed functionality
+// To close registrations again, copy the REGISTRATIONS_CLOSED logic from this file
+
 import { useState } from 'react';
 import { Mail, User, Phone, Upload, Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
