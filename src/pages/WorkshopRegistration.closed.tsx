@@ -1,3 +1,6 @@
+// BACKUP FILE: WorkshopRegistration with closed functionality
+// To close workshop registrations again, copy the WORKSHOP_REGISTRATIONS_CLOSED logic from this file
+
 import { useState } from 'react';
 import { Loader2, Clock, User, FileText, MapPin } from 'lucide-react';
 import toast from 'react-hot-toast';
